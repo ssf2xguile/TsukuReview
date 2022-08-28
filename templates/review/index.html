@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+
+        <div class="border-bottom border-2 index-main">
+            <img src="{% static 'images/index1.jpg' %}" alt="img" class="mx-auto d-block w-100">
+            <div class="index-main-content text-center">
+                <p class="text-white">授業の口コミが検索できます！<br>
+                自分が受けた授業があれば情報を共有しましょう！</p>
+                <button type="button" class="btn btn-info fs-3" onclick="location.href = '/search/';">
+                    講義スレッド検索へ進む
+                </button>
+            </div>
+        </div>
+
+        <div class="border-bottom border-2">
+            <div class="row">
+                <div class="col text-center"><h2>つくレビューの特徴</h2></div>
+            </div>
+        </div>
+
+        <div class="border-bottom border-2">
+            <div class="row align-items-center order-md-last">
+                <div class="col-md-6">
+                    <img src="{% static 'images/TRev大ロゴ.png' %}" alt="index_image1" class="w-100 mx-auto d-block">
+                </div>
+                <div class="col-md-6 order-md-first">
+                    <h4>つくレビューの特徴</h4>
+                    <p>TRev(つくレビュ)は筑波大生による筑波大生のための
+                        授業口コミサイトです。<br>
+                        授業情報だけでなく口コミを無料で閲覧できるなど、
+                        筑波大学生用サイトだからこその機能が満載。 <br>
+                        筑波大学生の半数に上るユーザーにご利用いただいています。
+                        広告なしのストレスフリーなサイトです。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="border-bottom border-2">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <img src="{% static 'images/悩んでいる人.png' %}" alt="index_image1" class="w-50 mx-auto d-block">
+                </div>
+                <div class="col-md-6">
+                    <h4>TRevが生まれた背景</h4>
+                    <p>筑波大学に入学して最初の難関といえば履修登録。<br>
+                        友人や先輩など知り合いがいない中、どんな授業を履修すればいいのか
+                        わからず悩んだ経験をした人が多くいると思います。<br>
+                        そんな履修登録の悩みを解決するために生み出されたサービス
+                        それがTRev(つくレビュ)です。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="border-bottom border-2">
+            <div class="row align-items-center order-md-last">
+                <div class="col-md-6">
+                    <img src="{% static 'images/解決.png' %}" alt="index_image1" class="w-50 mx-auto d-block">
+                </div>
+                <div class="col-md-6 order-md-first">
+                    <h4>興味のある授業を探そう</h4>
+                    <p>TRev(つくレビュ)は実際に授業を受けた先輩方が口コミを書いているので
+                        自分が履修したい授業が面白いのかあるいは難しいのか様々な情報を入手
+                        することができます。<br>
+                        情報を友達と共有してより快適なキャンパスライフを送りましょう。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

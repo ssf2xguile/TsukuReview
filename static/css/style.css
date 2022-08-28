@@ -1,0 +1,38 @@
+.pale-blue {
+    background-color: #A6D1E6;
+}
+
+.bg-gray {
+    background-color: #EFF1F6;
+}
+
+.index-main {
+    position: relative;
+}
+
+.index-main-content{
+    color: #fff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.border-bottom {
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.border-bottom:last-of-type {
+    padding-bottom: 15px;
+}
+
+footer {
+    background-color: #3D3C42;
+}
+
+@media (max-width:768px) {
+    .index-main img{
+        height: 200%;
+    }
+}
