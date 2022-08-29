@@ -3,8 +3,23 @@
 
 {% block content %}
     <div class="container">
-        <div class="row">
-            <div class="col"></div>
+        <div class="card card-radius d-flex my-3 shadow-sm">
+            <div class="row">
+                <div class="col-md-4">
+                    <!--空のdivクラスを用意し、d-flexを適用する(子要素を上下左右中央揃え)-->
+                    <div class="d-flex align-items-center justify-content-center w-100 h-100 py-3">
+                        <!--学類ごとのカラーや配置を設定-->
+                        <div class="college-img"><h1>情報</h1></div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">カードのタイトル</h5>
+                        <p class="card-text">以下のテキストを追加のコンテンツへの自然な導入としてサポート。カードのコンテンツ カードのコンテンツ</p>
+                        <a href="#" class="mynavi-btn">ボタン</a>
+                    </div>
+                </div>    
+            </div>
         </div>
     </div>
 {% endblock %}

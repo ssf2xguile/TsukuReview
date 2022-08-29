@@ -4,7 +4,7 @@
 }
 
 /* bodyの背景色 */
-.bg-gray {
+body {
     background-color: #EFF1F6;
 }
 
@@ -35,9 +35,36 @@
     padding-bottom: 15px;
 }
 
+
+/* カードの角丸 */
+.card-radius {
+    border-radius: 2rem;
+}
+
+.college-img {
+    width: 80%;
+    height: 400px;
+    border-radius: 2rem;
+    background-color: rgb(146, 223, 98);
+
+    /* フレックス要素で上下左右中央揃え */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* フッターの背景色 */
 footer {
     background-color: #3D3C42;
+}
+.mynavi-btn {
+    background:#d21414; /*背景色の指定*/
+    color:#ffffff; /*テキストの色の指定*/
+    border-bottom:#800808 5px solid; /*下部の境界線の指定*/
+    width:100px; /*幅の指定*/
+    text-align:center; /*中央揃えの指定*/
+    border-radius:5px;
+    padding:10px;
 }
 
 @media (max-width:768px) {
