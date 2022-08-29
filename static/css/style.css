@@ -1,13 +1,20 @@
+/* ヘッダー */
 .pale-blue {
     background-color: #A6D1E6;
 }
 
+/* bodyの背景色 */
 .bg-gray {
     background-color: #EFF1F6;
 }
 
+/* indexページの主要画像, 画像の中央に文字を重ねる */
 .index-main {
     position: relative;
+}
+
+.index-main img{
+    width: 100%;
 }
 
 .index-main-content{
@@ -18,21 +25,35 @@
     transform: translate(-50%,-50%);
 }
 
+
 .border-bottom {
     padding-bottom: 15px;
     margin-bottom: 15px;
 }
 
-.border-bottom:last-of-type {
+.container > [class^="border-bottom"]:last-child {
     padding-bottom: 15px;
 }
 
+/* フッターの背景色 */
 footer {
     background-color: #3D3C42;
 }
 
 @media (max-width:768px) {
+    /* indexページの主要画像, 画像の中央に文字を重ねる */
     .index-main img{
-        height: 200%;
+        width: 100%;
+        top: 200px;
+        height: 220px;
+        object-fit: cover;  
+        object-position: 30% 40%;
+    }
+    .index-main-content{
+        width: 75%;
+    }
+
+    .index-feature img{
+        padding-bottom: 15px;
     }
 }
