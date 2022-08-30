@@ -5,7 +5,7 @@
 
 /* bodyの背景色 */
 body {
-    background-color: #EFF1F6;
+    background-color: #EFF0F5;
 }
 
 /* indexページの主要画像, 画像の中央に文字を重ねる */
@@ -53,6 +53,71 @@ body {
     align-items: center;
 }
 
+/* コメントアイコンのサイズ調整 */
+.comment-img {
+    width: 40px;
+    height: 40px;
+}
+
+.star5_rating{
+    position: relative;
+    z-index: 0;
+    display: inline-block;
+    white-space: nowrap;
+    color: #cecece; /* グレーカラー 自由に設定化 */
+}
+
+.star5_rating:before, .star5_rating:after{
+    content: '★★★★★';
+}
+
+.star5_rating:after{
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    color: #fbc634; /* イエローカラー 自由に設定化 */
+}
+
+.star5_rating[data-rate="5"]:after{ width: 100%; } /* 星5 */
+.star5_rating[data-rate="4.5"]:after{ width: 90%; } /* 星4.5 */
+.star5_rating[data-rate="4"]:after{ width: 80%; } /* 星4 */
+.star5_rating[data-rate="3.5"]:after{ width: 70%; } /* 星3.5 */
+.star5_rating[data-rate="3"]:after{ width: 60%; } /* 星3 */
+.star5_rating[data-rate="2.5"]:after{ width: 50%; } /* 星2.5 */
+.star5_rating[data-rate="2"]:after{ width: 40%; } /* 星2 */
+.star5_rating[data-rate="1.5"]:after{ width: 30%; } /* 星1.5 */
+.star5_rating[data-rate="1"]:after{ width: 20%; } /* 星1 */
+.star5_rating[data-rate="0.5"]:after{ width: 10%; } /* 星0.5 */
+.star5_rating[data-rate="0"]:after{ width: 0%; } /* 星0 */
+
+.kugiri-box {
+    background-color: #F3F3F3;
+    border-left: 5px solid #01ABF7;
+
+}
+
+.comment-card {
+    border-radius: 10px;
+    border-top: 10px solid #01ABF7;
+}
+
+.user-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 60px;
+}
+
+.text-pink {
+    color: #FD386B;
+}
+
+.comment-color {
+    color: #00ACEF;
+}
+
 /* フッターの背景色 */
 footer {
     background-color: #3D3C42;
@@ -82,5 +147,14 @@ footer {
 
     .index-feature img{
         padding-bottom: 15px;
+    }
+
+    .college-img {
+        height: 100px;
+    }
+
+    .comment-img {
+        width: 30px;
+        height: 30px;
     }
 }
