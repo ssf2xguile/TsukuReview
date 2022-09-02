@@ -118,6 +118,10 @@ body {
     color: #00ACEF;
 }
 
+.modal-precautions {
+    background-color: #ffffe6;
+}
+
 /* フッターの背景色 */
 footer {
     background-color: #3D3C42;

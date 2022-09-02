@@ -2,192 +2,247 @@
 {% load static %}
 
 {% block content %}
-    <div class="container">
-        <div class="card card-radius d-flex my-3 shadow-sm">
-            <div class="row">
-                <div class="col-md-4">
-                    <!--空のdivクラスを用意し、d-flexを適用する(子要素を上下左右中央揃え)-->
-                    <div class="d-flex align-items-center justify-content-center w-100 h-100 py-3">
-                        <!--学類ごとのカラーや配置を設定-->
-                        <div class="college-img"><h1>人文</h1></div>
-                    </div>
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h3 class="card-title">分析哲学</h3>
-                        <h4 class="fw-normal">AC65A01</h4>
-                        <div class="kuchikomi mb-2">
-                            <img src="{% static 'images/コメントアイコン7.png' %}" alt="コメントアイコン" class="comment-img me-2">
-                            <p class="d-inline fw-bold me-2">口コミ</p>
-                            <p class="d-inline fs-4 me-2"><span class="star5_rating" data-rate="4"></span></p>
-                            <p class="d-inline fs-4 fw-bold text-primary me-2"><u>3.62</u></p>
-                            <p class="d-inline">(43件)</p>
-                        </div>
-                        <div class="whole mb-1">
-                            <h4 class="kugiri-box ps-2 py-2 shadow-sm">全体情報</h4>
-                            <div class="d-flex">
-                                <p class="d-inline me-4">単位: 2.0<br>履修年次: 2年</p>
-                                <p class="d-inline me-4">学期: 春AB<br>対象学類: 人文学類</p>
-                                <p class="d-inline">担当教員: 橋本康二</p>
-                            </div>
-                        </div>
-                        <div class="concept mb-3">
-                            <h4 class="kugiri-box ps-2 py-2 shadow-sm">授業概要</h4>
-                            <p class="card-text">分析哲学において存在、認識、論理、意味、心、行為などの問題がどのように論じられて
-                                きたのかを考察する。</p>
-                        </div>
-                        <div class="other mb-3">
-                            <h4 class="kugiri-box ps-2 py-2 shadow-sm">その他情報</h4>
-                            <a href="https://kdb.tsukuba.ac.jp/syllabi/2022/AC65A01/jpn" target="_blank" class="text-info">シラバスを参照</a>
-                        </div>
-                    </div>
-                </div>    
-            </div>
-        </div>
-
-
+<div class="container">
+    <div class="card card-radius d-flex my-3 shadow-sm">
         <div class="row">
-            <div class="col my-3 kugiri-box ps-2 py-2 shadow-sm d-flex justify-content-between">
-                <h4 class="d-inline">口コミ(評判)</h4>
-                <button type="button" class="btn btn-secondary">投稿する</button>
+            <div class="col-md-4">
+                <!--空のdivクラスを用意し、d-flexを適用する(子要素を上下左右中央揃え)-->
+                <div class="d-flex align-items-center justify-content-center w-100 h-100 py-3">
+                    <!--学類ごとのカラーや配置を設定-->
+                    <div class="college-img">
+                        <h1>人文</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h3 class="card-title">分析哲学</h3>
+                    <h4 class="fw-normal">AC65A01</h4>
+                    <div class="kuchikomi mb-2">
+                        <img src="{% static 'images/コメントアイコン7.png' %}" alt="コメントアイコン" class="comment-img me-2">
+                        <p class="d-inline fw-bold me-2">口コミ</p>
+                        <p class="d-inline fs-4 me-2"><span class="star5_rating" data-rate="4"></span></p>
+                        <p class="d-inline fs-4 fw-bold text-primary me-2"><u>3.62</u></p>
+                        <p class="d-inline">(43件)</p>
+                    </div>
+                    <div class="whole mb-1">
+                        <h4 class="kugiri-box ps-2 py-2 shadow-sm">全体情報</h4>
+                        <div class="d-flex">
+                            <p class="d-inline me-4">単位: 2.0<br>履修年次: 2年</p>
+                            <p class="d-inline me-4">学期: 春AB<br>対象学類: 人文学類</p>
+                            <p class="d-inline">担当教員: 橋本康二</p>
+                        </div>
+                    </div>
+                    <div class="concept mb-3">
+                        <h4 class="kugiri-box ps-2 py-2 shadow-sm">授業概要</h4>
+                        <p class="card-text">分析哲学において存在、認識、論理、意味、心、行為などの問題がどのように論じられて
+                            きたのかを考察する。分析哲学において存在、認識、論理、意味、心、行為などの問題がどのように論じられて
+                            きたのかを考察する。分析哲学において存在、認識、論理、意味、心、行為などの問題がどのように論じられて
+                            きたのかを考察する。</p>
+                    </div>
+                    <div class="other mb-3">
+                        <h4 class="kugiri-box ps-2 py-2 shadow-sm">その他情報</h4>
+                        <a href="https://kdb.tsukuba.ac.jp/syllabi/2022/AC65A01/jpn" target="_blank"
+                            class="text-info">シラバスを参照</a>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
 
 
-        <div class="row justify-content-center">
-            <div class="col-md-10">
-                <div class="card comment-card my-3 shadow-sm">
-                    <div class="card-body">
-                        <div class="card-upper-box d-flex align-items-center border-bottom">
-                            <img src="{% static 'images/ユーザーアイコン1.jpg' %}" alt="ユーザーアイコン1" class="user-icon mx-2">
-                            <div class="d-inline-block me-auto">
-                                <p class="small fw-bold mb-0">人文学類生 / 2020年度受講</p>
-                                <h4 class="mb-0">結局は自分でやるしかない</h4>
-                                <p class="small mb-0">名無しの筑波大生</p>
-                                <p class="small mb-0">2021年4月投稿</p>
-                            </div>
-                            <div class="d-inline-block me-2">
-                                <div class="d-flex justify-content-end align-items-center">
-                                    <p class="d-inline-block fs-4 me-2"><span class="star5_rating" data-rate="4"></span></p>
-                                    <p class="d-inline-block fs-4 fw-bold text-pink">4.0</p>
-                                </div>
-                                <div class="d-flex justify-content-end align-items-center">
-                                    <h4>成績: B</h4>
-                                </div>
-                            </div>
+    <div class="row">
+        <div class="col my-3 kugiri-box ps-2 py-2 shadow-sm d-flex justify-content-between">
+            <h4 class="d-inline">口コミ(評判)</h4>
+            <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                href="#exampleModalToggle1">投稿する</button>
+        </div>
+    </div>
+
+
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card comment-card my-3 shadow-sm">
+                <div class="card-body">
+                    <div class="card-upper-box d-flex align-items-center border-bottom">
+                        <img src="{% static 'images/ユーザーアイコン1.jpg' %}" alt="ユーザーアイコン1" class="user-icon mx-2">
+                        <div class="d-inline-block me-auto">
+                            <p class="small fw-bold mb-0">人文学類生 / 2020年度受講</p>
+                            <h4 class="mb-0">結局は自分でやるしかない</h4>
+                            <p class="small mb-0">名無しの筑波大生</p>
+                            <p class="small mb-0">2021年4月投稿</p>
                         </div>
-                        <div class="main-comment mx-2">
-                            <div class="comment mb-2">
-                                <h4 class="comment-color">総評</h4>
-                                <p>現代思想の入門の入門となることを目指して書かれたものであるが、著者なりの総決算となるものでもあり、おわりにでは、「これは青春の総括であり、憧れへの終幕なのです。」とまとめられている。
-                                    それゆえ、著者の現代思想に関する読書遍歴あるいは研究履歴のようなところもあって、現代思想を総ざらいするというよりは、代表的な人物を著者なりの着眼点をもって整理したという内容である。
-                                    そのために、網羅性という点では現代思想入門というには相応しくないところもないわけではないが、例えば最初に読むべき入門書を紹介してくれたりと、
-                                    「入門の入門」としようとする配慮が十分になされており、現代思想の入門として読むには十分に意義のある一冊だと思う。</p>
+                        <div class="d-inline-block me-2">
+                            <div class="d-flex justify-content-end align-items-center">
+                                <p class="d-inline-block fs-4 me-2"><span class="star5_rating" data-rate="4"></span></p>
+                                <p class="d-inline-block fs-4 fw-bold text-pink">4.0</p>
                             </div>
-                            <div class="comment mb-2">
-                                <h4 class="comment-color">授業の難易度</h4>
-                                <p>難しいです。受講生の前提知識も確認せずにいきなり専門用語を使ってきます。そのうえなんとも知っていて当然だろと言わんばかりのように話を進めていきます。</p>
-                            </div>
-                            <div class="comment mb-2">
-                                <h4 class="comment-color">課題や試験の内容・量</h4>
-                                <p>毎週の小テストが地獄です。いちいち授業動画を見ながら解かないといけない上にそもそもの授業内容が難しいので解くのにかなりの時間を要します。</p>
-                            </div>
-                            <div class="comment mb-2">
-                                <h4 class="comment-color">評価の甘さ</h4>
-                                <p>他の授業と比べても普通だと思う。</p>
+                            <div class="d-flex justify-content-end align-items-center">
+                                <h4>成績: B</h4>
                             </div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="card comment-card my-3 shadow-sm">
-                    <div class="card-body">
-                        <div class="card-upper-box d-flex align-items-center border-bottom">
-                            <img src="{% static 'images/ユーザーアイコン1.jpg' %}" alt="ユーザーアイコン1" class="user-icon mx-2">
-                            <div class="d-inline-block me-auto">
-                                <p class="small fw-bold mb-0">人文学類生 / 2020年度受講</p>
-                                <h4 class="mb-0">向き不向きがある</h4>
-                                <p class="small mb-0">名無しの筑波大生</p>
-                                <p class="small mb-0">2021年4月投稿</p>
-                            </div>
-                            <div class="d-inline-block me-2">
-                                <div class="d-flex justify-content-end align-items-center">
-                                    <p class="d-inline-block fs-4 me-2"><span class="star5_rating" data-rate="4"></span></p>
-                                    <p class="d-inline-block fs-4 fw-bold text-pink">4.0</p>
-                                </div>
-                                <div class="d-flex justify-content-end align-items-center">
-                                    <h4>成績: 非公開</h4>
-                                </div>
-                            </div>
+                    <div class="main-comment mx-2">
+                        <div class="comment mb-2">
+                            <h4 class="comment-color">総評</h4>
+                            <p>現代思想の入門の入門となることを目指して書かれたものであるが、著者なりの総決算となるものでもあり、おわりにでは、「これは青春の総括であり、憧れへの終幕なのです。」とまとめられている。
+                                それゆえ、著者の現代思想に関する読書遍歴あるいは研究履歴のようなところもあって、現代思想を総ざらいするというよりは、代表的な人物を著者なりの着眼点をもって整理したという内容である。
+                                そのために、網羅性という点では現代思想入門というには相応しくないところもないわけではないが、例えば最初に読むべき入門書を紹介してくれたりと、
+                                「入門の入門」としようとする配慮が十分になされており、現代思想の入門として読むには十分に意義のある一冊だと思う。</p>
                         </div>
-                        <div class="main-comment mx-2">
-                            <div class="comment mb-2">
-                                <h4 class="comment-color">総評</h4>
-                                <p>現代思想の入門の入門となることを目指して書かれたものであるが、著者なりの総決算となるものでもあり、おわりにでは、「これは青春の総括であり、憧れへの終幕なのです。」とまとめられている。
-                                    それゆえ、著者の現代思想に関する読書遍歴あるいは研究履歴のようなところもあって、現代思想を総ざらいするというよりは、代表的な人物を著者なりの着眼点をもって整理したという内容である。
-                                    そのために、網羅性という点では現代思想入門というには相応しくないところもないわけではないが、例えば最初に読むべき入門書を紹介してくれたりと、
-                                    「入門の入門」としようとする配慮が十分になされており、現代思想の入門として読むには十分に意義のある一冊だと思う。</p>
-                            </div>
-                            <div class="comment mb-2">
-                                <h4 class="comment-color">授業の難易度</h4>
-                                <p>難しいです。受講生の前提知識も確認せずにいきなり専門用語を使ってきます。そのうえなんとも知っていて当然だろと言わんばかりのように話を進めていきます。</p>
-                            </div>
-                            <div class="comment mb-2">
-                                <h4 class="comment-color">課題や試験の内容・量</h4>
-                                <p>毎週の小テストが地獄です。いちいち授業動画を見ながら解かないといけない上にそもそもの授業内容が難しいので解くのにかなりの時間を要します。</p>
-                            </div>
-                            <div class="comment mb-2">
-                                <h4 class="comment-color">評価の甘さ</h4>
-                                <p>他の授業と比べても普通だと思う。</p>
-                            </div>
+                        <div class="comment mb-2">
+                            <h4 class="comment-color">授業の難易度</h4>
+                            <p>難しいです。受講生の前提知識も確認せずにいきなり専門用語を使ってきます。そのうえなんとも知っていて当然だろと言わんばかりのように話を進めていきます。</p>
+                        </div>
+                        <div class="comment mb-2">
+                            <h4 class="comment-color">課題や試験の内容・量</h4>
+                            <p>毎週の小テストが地獄です。いちいち授業動画を見ながら解かないといけない上にそもそもの授業内容が難しいので解くのにかなりの時間を要します。</p>
+                        </div>
+                        <div class="comment mb-2">
+                            <h4 class="comment-color">評価の甘さ</h4>
+                            <p>他の授業と比べても普通だと思う。</p>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="card comment-card my-3 shadow-sm">
-                    <div class="card-body">
-                        <div class="card-upper-box d-flex align-items-center border-bottom">
-                            <img src="{% static 'images/ユーザーアイコン1.jpg' %}" alt="ユーザーアイコン1" class="user-icon mx-2">
-                            <div class="d-inline-block me-auto">
-                                <p class="small fw-bold mb-0">情報科学類生 / 2020年度受講</p>
-                                <h4 class="mb-0">こんなんでDつけられるなんてたまったもんじゃない</h4>
-                                <p class="small mb-0">名無しの筑波大生</p>
-                                <p class="small mb-0">2021年4月投稿</p>
+            <div class="card comment-card my-3 shadow-sm">
+                <div class="card-body">
+                    <div class="card-upper-box d-flex align-items-center border-bottom">
+                        <img src="{% static 'images/ユーザーアイコン1.jpg' %}" alt="ユーザーアイコン1" class="user-icon mx-2">
+                        <div class="d-inline-block me-auto">
+                            <p class="small fw-bold mb-0">人文学類生 / 2020年度受講</p>
+                            <h4 class="mb-0">向き不向きがある</h4>
+                            <p class="small mb-0">名無しの筑波大生</p>
+                            <p class="small mb-0">2021年4月投稿</p>
+                        </div>
+                        <div class="d-inline-block me-2">
+                            <div class="d-flex justify-content-end align-items-center">
+                                <p class="d-inline-block fs-4 me-2"><span class="star5_rating" data-rate="4"></span></p>
+                                <p class="d-inline-block fs-4 fw-bold text-pink">4.0</p>
                             </div>
-                            <div class="d-inline-block me-2">
-                                <div class="d-flex justify-content-end align-items-center">
-                                    <p class="d-inline-block fs-4 me-2"><span class="star5_rating" data-rate="4"></span></p>
-                                    <p class="d-inline-block fs-4 fw-bold text-pink">4.0</p>
-                                </div>
-                                <div class="d-flex justify-content-end align-items-center">
-                                    <h4>成績: D</h4>
-                                </div>
+                            <div class="d-flex justify-content-end align-items-center">
+                                <h4>成績: 非公開</h4>
                             </div>
                         </div>
-                        <div class="main-comment mx-2">
-                            <div class="comment mb-2">
-                                <h4 class="comment-color">総評</h4>
-                                <p>現代思想の入門の入門となることを目指して書かれたものであるが、著者なりの総決算となるものでもあり、おわりにでは、「これは青春の総括であり、憧れへの終幕なのです。」とまとめられている。
-                                    それゆえ、著者の現代思想に関する読書遍歴あるいは研究履歴のようなところもあって、現代思想を総ざらいするというよりは、代表的な人物を著者なりの着眼点をもって整理したという内容である。
-                                    そのために、網羅性という点では現代思想入門というには相応しくないところもないわけではないが、例えば最初に読むべき入門書を紹介してくれたりと、
-                                    「入門の入門」としようとする配慮が十分になされており、現代思想の入門として読むには十分に意義のある一冊だと思う。</p>
+                    </div>
+                    <div class="main-comment mx-2">
+                        <div class="comment mb-2">
+                            <h4 class="comment-color">総評</h4>
+                            <p>現代思想の入門の入門となることを目指して書かれたものであるが、著者なりの総決算となるものでもあり、おわりにでは、「これは青春の総括であり、憧れへの終幕なのです。」とまとめられている。
+                                それゆえ、著者の現代思想に関する読書遍歴あるいは研究履歴のようなところもあって、現代思想を総ざらいするというよりは、代表的な人物を著者なりの着眼点をもって整理したという内容である。
+                                そのために、網羅性という点では現代思想入門というには相応しくないところもないわけではないが、例えば最初に読むべき入門書を紹介してくれたりと、
+                                「入門の入門」としようとする配慮が十分になされており、現代思想の入門として読むには十分に意義のある一冊だと思う。</p>
+                        </div>
+                        <div class="comment mb-2">
+                            <h4 class="comment-color">授業の難易度</h4>
+                            <p>難しいです。受講生の前提知識も確認せずにいきなり専門用語を使ってきます。そのうえなんとも知っていて当然だろと言わんばかりのように話を進めていきます。</p>
+                        </div>
+                        <div class="comment mb-2">
+                            <h4 class="comment-color">課題や試験の内容・量</h4>
+                            <p>毎週の小テストが地獄です。いちいち授業動画を見ながら解かないといけない上にそもそもの授業内容が難しいので解くのにかなりの時間を要します。</p>
+                        </div>
+                        <div class="comment mb-2">
+                            <h4 class="comment-color">評価の甘さ</h4>
+                            <p>他の授業と比べても普通だと思う。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card comment-card my-3 shadow-sm">
+                <div class="card-body">
+                    <div class="card-upper-box d-flex align-items-center border-bottom">
+                        <img src="{% static 'images/ユーザーアイコン1.jpg' %}" alt="ユーザーアイコン1" class="user-icon mx-2">
+                        <div class="d-inline-block me-auto">
+                            <p class="small fw-bold mb-0">情報科学類生 / 2020年度受講</p>
+                            <h4 class="mb-0">こんなんでDつけられるなんてたまったもんじゃない</h4>
+                            <p class="small mb-0">名無しの筑波大生</p>
+                            <p class="small mb-0">2021年4月投稿</p>
+                        </div>
+                        <div class="d-inline-block me-2">
+                            <div class="d-flex justify-content-end align-items-center">
+                                <p class="d-inline-block fs-4 me-2"><span class="star5_rating" data-rate="4"></span></p>
+                                <p class="d-inline-block fs-4 fw-bold text-pink">4.0</p>
                             </div>
-                            <div class="comment mb-2">
-                                <h4 class="comment-color">授業の難易度</h4>
-                                <p>難しいです。受講生の前提知識も確認せずにいきなり専門用語を使ってきます。そのうえなんとも知っていて当然だろと言わんばかりのように話を進めていきます。</p>
+                            <div class="d-flex justify-content-end align-items-center">
+                                <h4>成績: D</h4>
                             </div>
-                            <div class="comment mb-2">
-                                <h4 class="comment-color">課題や試験の内容・量</h4>
-                                <p>毎週の小テストが地獄です。いちいち授業動画を見ながら解かないといけない上にそもそもの授業内容が難しいので解くのにかなりの時間を要します。</p>
-                            </div>
-                            <div class="comment mb-2">
-                                <h4 class="comment-color">評価の甘さ</h4>
-                                <p>他の授業と比べても普通だと思う。</p>
-                            </div>
+                        </div>
+                    </div>
+                    <div class="main-comment mx-2">
+                        <div class="comment mb-2">
+                            <h4 class="comment-color">総評</h4>
+                            <p>現代思想の入門の入門となることを目指して書かれたものであるが、著者なりの総決算となるものでもあり、おわりにでは、「これは青春の総括であり、憧れへの終幕なのです。」とまとめられている。
+                                それゆえ、著者の現代思想に関する読書遍歴あるいは研究履歴のようなところもあって、現代思想を総ざらいするというよりは、代表的な人物を著者なりの着眼点をもって整理したという内容である。
+                                そのために、網羅性という点では現代思想入門というには相応しくないところもないわけではないが、例えば最初に読むべき入門書を紹介してくれたりと、
+                                「入門の入門」としようとする配慮が十分になされており、現代思想の入門として読むには十分に意義のある一冊だと思う。</p>
+                        </div>
+                        <div class="comment mb-2">
+                            <h4 class="comment-color">授業の難易度</h4>
+                            <p>難しいです。受講生の前提知識も確認せずにいきなり専門用語を使ってきます。そのうえなんとも知っていて当然だろと言わんばかりのように話を進めていきます。</p>
+                        </div>
+                        <div class="comment mb-2">
+                            <h4 class="comment-color">課題や試験の内容・量</h4>
+                            <p>毎週の小テストが地獄です。いちいち授業動画を見ながら解かないといけない上にそもそもの授業内容が難しいので解くのにかなりの時間を要します。</p>
+                        </div>
+                        <div class="comment mb-2">
+                            <h4 class="comment-color">評価の甘さ</h4>
+                            <p>他の授業と比べても普通だと思う。</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+<div class="modal fade" id="exampleModalToggle1" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+    tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalToggleLabel">注意！</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body modal-precautions">
+                <p>以下の2点を確認した上で口コミを記入してください。</p>
+                <h5>1.個人特定のできる口コミは記入しないでください</h5>
+                <p>学生、先生などの個人が特定できる口コミは記入しないでください。</p>
+
+                <h5>2.授業選びに役立つ口コミを記入してください</h5>
+                <p>以下にあてはまる口コミは承認されません。</p>
+                <p>・事実ではない口コミ<br>
+                    ・なりすましと見られる口コミ<br>
+                    ・根拠のないうわさ、推測による口コミ<br>
+                    ・誹謗中傷の口コミ
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"
+                    data-bs-dismiss="modal">同意して投稿する</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+    tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalToggleLabel2">投稿フォーム</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Hide this modal and show the first with the button below.
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-target="#exampleModalToggle1" data-bs-toggle="modal"
+                    data-bs-dismiss="modal">戻る</button>
+                <button class="btn btn-primary" data-bs-target="#exampleModalToggle1" data-bs-toggle="modal"
+                    data-bs-dismiss="modal">投稿する</button>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
