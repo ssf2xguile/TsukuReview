@@ -10,14 +10,14 @@
                 <div class="d-flex align-items-center justify-content-center w-100 h-100 py-3">
                     <!--学類ごとのカラーや配置を設定-->
                     <div class="college-img">
-                        <h1>人文</h1>
+                        <h1>{{subject_data.schools}}</h1>
                     </div>
                 </div>
             </div>
             <div class="col-md-8">
                 <div class="card-body">
-                    <h3 class="card-title">分析哲学</h3>
-                    <h4 class="fw-normal">AC65A01</h4>
+                    <h3 class="card-title">{{subject_data.name}}</h3>
+                    <h4 class="fw-normal">{{subject_data.code}}</h4>
                     <div class="kuchikomi mb-2">
                         <img src="{% static 'images/コメントアイコン7.png' %}" alt="コメントアイコン" class="comment-img me-2">
                         <p class="d-inline fw-bold me-2">口コミ</p>
@@ -28,21 +28,18 @@
                     <div class="whole mb-1">
                         <h4 class="kugiri-box ps-2 py-2 shadow-sm">全体情報</h4>
                         <div class="d-flex">
-                            <p class="d-inline me-4">単位: 2.0<br>履修年次: 2年</p>
-                            <p class="d-inline me-4">学期: 春AB<br>対象学類: 人文学類</p>
-                            <p class="d-inline">担当教員: 橋本康二</p>
+                            <p class="d-inline me-4">単位: {{subject_data.unit}}<br>履修年次: {{subject_data.grade}}年</p>
+                            <p class="d-inline me-4">学期: {{subject_data.semester}}<br>対象学類: {{subject_data.colleges}}</p>
+                            <p class="d-inline">担当教員: {{subject_data.teachers | truncatechars:20}}</p>
                         </div>
                     </div>
                     <div class="concept mb-3">
                         <h4 class="kugiri-box ps-2 py-2 shadow-sm">授業概要</h4>
-                        <p class="card-text">分析哲学において存在、認識、論理、意味、心、行為などの問題がどのように論じられて
-                            きたのかを考察する。分析哲学において存在、認識、論理、意味、心、行為などの問題がどのように論じられて
-                            きたのかを考察する。分析哲学において存在、認識、論理、意味、心、行為などの問題がどのように論じられて
-                            きたのかを考察する。</p>
+                        <p class="card-text">{{subject_data.overview}}</p>
                     </div>
                     <div class="other mb-3">
                         <h4 class="kugiri-box ps-2 py-2 shadow-sm">その他情報</h4>
-                        <a href="https://kdb.tsukuba.ac.jp/syllabi/2022/AC65A01/jpn" target="_blank"
+                        <a href="https://kdb.tsukuba.ac.jp/syllabi/2022/{{subject_data.code}}/jpn" target="_blank"
                             class="text-info">シラバスを参照</a>
                     </div>
                 </div>
@@ -197,6 +194,7 @@
     </div>
 </div>
 
+<!-- モーダル処理 -->
 <div class="modal fade" id="exampleModalToggle1" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
     tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
@@ -226,23 +224,63 @@
     </div>
 </div>
 <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
-    tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
+    tabindex="-1" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalToggleLabel2">投稿フォーム</h5>
+                <h5 class="modal-title" id="exampleModalToggleLabel2">口コミ投稿フォーム</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form action="" method="post" id="post_form">
                     {% csrf_token %}
                     <div class="mb-3">
+                        <label for="titleFormControlTextarea1" class="form-label">タイトル</label>
+                        <textarea class="form-control" id="titleFormControlTextarea1" rows="1"
+                            name="title"></textarea>
+                    </div>
+                    <div class="mb-3 d-flex">
+                        <div class="d-inline me-4">
+                            <label class="form-label">受講した年度</label>
+                            <select class="form-select">
+                                <!-- <option value="2023">2023年度</option> -->
+                                <option value="2022">2022年度</option>
+                                <option value="2021">2021年度</option>
+                                <option value="2020">2020年度</option>
+                                <option value="2019">2019年度</option>
+                            </select>
+                        </div>
+                        <div class="d-inline me-4">
+                            <label class="form-label">星</label>
+                            <select class="form-select">
+                                <option value="5">5</option>
+                                <option value="4">4</option>
+                                <option value="3">3</option>
+                                <option value="2">2</option>
+                                <option value="1">1</option>
+                            </select>
+                        </div>
+                        <div class="d-inline">
+                            <label class="form-label">成績</label>
+                            <select class="form-select">
+                                <option value="5">A+</option>
+                                <option value="4">A</option>
+                                <option value="3">B</option>
+                                <option value="2">C</option>
+                                <option value="1">D</option>
+                                <option value="0">非公開</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3">
                         <label for="overallFormControlTextarea1" class="form-label">総評</label>
-                        <textarea class="form-control" id="overallFormControlTextarea1" rows="4" name="overall"></textarea>
+                        <textarea class="form-control" id="overallFormControlTextarea1" rows="4"
+                            name="overall"></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="difficultyFormControlTextarea1" class="form-label">授業の難易度</label>
-                        <textarea class="form-control" id="difficultyFormControlTextarea1" rows="4" name="difficulty"></textarea>
+                        <textarea class="form-control" id="difficultyFormControlTextarea1" rows="4"
+                            name="difficulty"></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="kadaiFormControlTextarea1" class="form-label">課題や試験の内容・量</label>
@@ -250,7 +288,8 @@
                     </div>
                     <div class="mb-3">
                         <label for="evaluationFormControlTextarea1" class="form-label">評価の甘さ</label>
-                        <textarea class="form-control" id="evaluationFormControlTextarea1" rows="2" name="evaluation"></textarea>
+                        <textarea class="form-control" id="evaluationFormControlTextarea1" rows="2"
+                            name="evaluation"></textarea>
                     </div>
                 </form>
             </div>
