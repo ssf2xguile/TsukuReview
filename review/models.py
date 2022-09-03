@@ -29,10 +29,31 @@ class Subject(models.Model):
         return self.code + " " + self.name
 
 class Review(models.Model):
-    lecture  = models.ForeignKey(Subject, on_delete=models.CASCADE, default=0)
-    review_id = models.UUIDField(verbose_name='投稿者id', primary_key=True, default=uuid.uuid4, editable=False)
-    sender_name = models.CharField(verbose_name='投稿者名', max_length=40, blank=False)
-    text = models.TextField(verbose_name='本文', blank=False, max_length=500)
+    RATING = (
+        (5, '5.0'),
+        (4, '4.0'),
+        (3, '2.0'),
+        (2, '2.0'),
+        (1, '1.0'),
+    )
+    YEAR = (
+        (2022, '2022年'),
+        (2021, '2021年'),
+        (2020, '2020年'),
+        (2019, '2019年'),
+    )
+
+    lecture  = models.ForeignKey(Subject, on_delete=models.CASCADE, default='GA13501')
+    review_id = models.UUIDField(verbose_name='口コミid', primary_key=True, default=uuid.uuid4, editable=False)
+    # sender_name = models.CharField(verbose_name='投稿者名', blank=False, max_length=40)
+    # sender_college = models.CharField(verbose_name='投稿者の所属学類', blank=False, max_length=40)
+    title = models.CharField(verbose_name='タイトル', blank=False, null=True,max_length=30)
+    rating = models.IntegerField(verbose_name='星', choices=RATING, default=1)
+    year = models.IntegerField(verbose_name='受講した年度', choices=YEAR, default=2021)
+    overall = models.TextField(verbose_name='総評', blank=False, null=True,max_length=500)
+    difficulty = models.TextField(verbose_name="難易度",blank=False, null=True,max_length=100)
+    kadai = models.TextField(verbose_name="課題の量・質",blank=False, null=True,max_length=100)
+    evaluation = models.TextField(verbose_name="評価の甘さ",blank=False, null=True,max_length=100)
     created_at = models.DateTimeField(verbose_name='作成日時', default=timezone.now)
     
 
