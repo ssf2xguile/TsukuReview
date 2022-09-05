@@ -1,4 +1,7 @@
 // モーダルで投稿するための関数
 function form_submit() {
-    document.getElementById("post_form").submit();
-} 
+    const sendButton = document.getElementById("modal-send-button");
+    const submitButton = document.getElementById("hidden-submit-button");
+    submitButton.click();
+}
+ 

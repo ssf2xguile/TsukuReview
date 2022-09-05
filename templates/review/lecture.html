@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load widget_tweaks %}
 
 {% block content %}
 <div class="container">
@@ -234,72 +235,118 @@
             <div class="modal-body">
                 <form action="" method="post" id="post_form">
                     {% csrf_token %}
+                    {{ form.non_field_errors }}
                     <div class="mb-3">
                         <label for="titleFormControlTextarea1" class="form-label">タイトル</label>
-                        <textarea class="form-control" id="titleFormControlTextarea1" rows="1"
-                            name="title"></textarea>
+                        {{form.title|add_class:"form-control"|attr:"id:titleFormControlTextarea1"|attr:"rows:1"}}
+                        {{form.title.errors.0}}
                     </div>
                     <div class="mb-3 d-flex">
                         <div class="d-inline me-4">
                             <label class="form-label">受講した年度</label>
-                            <select class="form-select">
-                                <!-- <option value="2023">2023年度</option> -->
-                                <option value="2022">2022年度</option>
-                                <option value="2021">2021年度</option>
-                                <option value="2020">2020年度</option>
-                                <option value="2019">2019年度</option>
-                            </select>
+                            {{form.year|add_class:"form-select"}}
                         </div>
                         <div class="d-inline me-4">
                             <label class="form-label">星</label>
-                            <select class="form-select">
-                                <option value="5">5</option>
-                                <option value="4">4</option>
-                                <option value="3">3</option>
-                                <option value="2">2</option>
-                                <option value="1">1</option>
-                            </select>
+                            {{form.rating|add_class:"form-select"}}
                         </div>
                         <div class="d-inline">
                             <label class="form-label">成績</label>
-                            <select class="form-select">
-                                <option value="5">A+</option>
-                                <option value="4">A</option>
-                                <option value="3">B</option>
-                                <option value="2">C</option>
-                                <option value="1">D</option>
-                                <option value="0">非公開</option>
-                            </select>
+                            {{form.grade|add_class:"form-select"}}
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="overallFormControlTextarea1" class="form-label">総評</label>
-                        <textarea class="form-control" id="overallFormControlTextarea1" rows="4"
-                            name="overall"></textarea>
+                        {{form.overall|add_class:"form-control"|attr:"id:overallFormControlTextarea1"|attr:"rows:4"}}
+                        {{form.overall.errors.0}}
                     </div>
                     <div class="mb-3">
                         <label for="difficultyFormControlTextarea1" class="form-label">授業の難易度</label>
-                        <textarea class="form-control" id="difficultyFormControlTextarea1" rows="4"
-                            name="difficulty"></textarea>
+                        {{form.difficulty|add_class:"form-control"|attr:"id:difficultyFormControlTextarea1"|attr:"rows:4"}}
+                        {{form.difficulty.errors.0}}
                     </div>
                     <div class="mb-3">
                         <label for="kadaiFormControlTextarea1" class="form-label">課題や試験の内容・量</label>
-                        <textarea class="form-control" id="kadaiFormControlTextarea1" rows="2" name="kadai"></textarea>
+                       {{form.kadai|add_class:"form-control"|attr:"id:kadaiFormControlTextarea1"|attr:"rows:2"}}
+                        {{form.kadai.errors.0}}
                     </div>
                     <div class="mb-3">
                         <label for="evaluationFormControlTextarea1" class="form-label">評価の甘さ</label>
-                        <textarea class="form-control" id="evaluationFormControlTextarea1" rows="2"
-                            name="evaluation"></textarea>
+                        {{form.evaluation|add_class:"form-control"|attr:"id:evaluationFormControlTextarea1"|attr:"rows:2"}}
+                        {{form.evaluation.errors.0}}
+                    </div>
+                    <div class="field d-none">
+                        <button type="submit" id="hidden-submit-button">送信</button>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" data-bs-target="#exampleModalToggle1" data-bs-toggle="modal"
                     data-bs-dismiss="modal">戻る</button>
-                <button class="btn btn-primary" data-bs-target="#exampleModalToggle1" data-bs-toggle="modal"
-                    data-bs-dismiss="modal" onclick="form_submit()">投稿する</button>
+                <button class="btn btn-primary" onclick="form_submit()" id="modal-send-button">投稿する</button>
             </div>
         </div>
     </div>
 </div>
 {% endblock %}
+
+<!-- <form action="" method="post" id="post_form">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="titleFormControlTextarea1" class="form-label">タイトル</label>
+        <textarea class="form-control" id="titleFormControlTextarea1" rows="1"
+            name="title"></textarea>
+    </div>
+    <div class="mb-3 d-flex">
+        <div class="d-inline me-4">
+            <label class="form-label">受講した年度</label>
+            <select class="form-select">
+                <option value="2023">2023年度</option>
+                <option value="2022">2022年度</option>
+                <option value="2021">2021年度</option>
+                <option value="2020">2020年度</option>
+                <option value="2019">2019年度</option>
+            </select>
+        </div>
+        <div class="d-inline me-4">
+            <label class="form-label">星</label>
+            <select class="form-select">
+                <option value="5">5</option>
+                <option value="4">4</option>
+                <option value="3">3</option>
+                <option value="2">2</option>
+                <option value="1">1</option>
+            </select>
+        </div>
+        <div class="d-inline">
+            <label class="form-label">成績</label>
+            <select class="form-select">
+                <option value="5">A+</option>
+                <option value="4">A</option>
+                <option value="3">B</option>
+                <option value="2">C</option>
+                <option value="1">D</option>
+                <option value="0">非公開</option>
+            </select>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="overallFormControlTextarea1" class="form-label">総評</label>
+        <textarea class="form-control" id="overallFormControlTextarea1" rows="4"
+            name="overall"></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="difficultyFormControlTextarea1" class="form-label">授業の難易度</label>
+        <textarea class="form-control" id="difficultyFormControlTextarea1" rows="4"
+            name="difficulty"></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="kadaiFormControlTextarea1" class="form-label">課題や試験の内容・量</label>
+        <textarea class="form-control" id="kadaiFormControlTextarea1" rows="2" name="kadai"></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="evaluationFormControlTextarea1" class="form-label">評価の甘さ</label>
+        <textarea class="form-control" id="evaluationFormControlTextarea1" rows="2"
+            name="evaluation"></textarea>
+    </div>
+</form> -->
