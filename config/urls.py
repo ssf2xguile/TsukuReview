@@ -20,6 +20,7 @@ from django.conf.urls.static import static  #追加（静的ファイル）
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/', include('accounts.urls')), # 2. 自作の機能へ振り分け
+    path('accounts/', include('django.contrib.auth.urls')), # 1. 元々提供されている機能へ振り分け
     path('', include('review.urls')),
-    path('accounts/', include('accounts.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

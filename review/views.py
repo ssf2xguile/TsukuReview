@@ -19,7 +19,7 @@ class LectureView(FormMixin, DetailView):
         context = super().get_context_data(**kwargs)
         # self.kwargs['pk']でurl中の変数pkを取得できる
         context['subject_data'] = Subject.objects.get(pk=self.kwargs['pk'])
-        context['review_data'] = Review.objects.filter(lecture=self.kwargs['pk']).order_by('-created_at')
+        context['review_datas'] = Review.objects.filter(lecture=self.kwargs['pk']).order_by('created_at')
         context['form'] = ReviewForm()
         return context
 
