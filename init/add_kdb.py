@@ -23,7 +23,7 @@ for sub in kdb["subject"]:
     rating = 5
     grade = 5
     review = [sub[0], review_id, msg_title, year, rating, grade, msg_overall, msg_difficulty, msg_kadai, msg_evaluation]
-    col = [sub[0], sub[1], sub[3], sub[4], sub[5], sub[8], sub[9], sub[13], sub[14], sub[15], 0, 0, 0, 0, 0]
+    col = [sub[0], sub[1], sub[3], sub[4], sub[5], sub[8], sub[9], sub[13], sub[14], sub[15], 0, 0, 0, 0, 1]
     cur.execute("insert into review_subject("
     + "code,name,unit,grade,semester,teachers,overview,subtype,schools,colleges,star1,star2,star3,star4,star5"
     + ") values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);", col)

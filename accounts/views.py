@@ -10,11 +10,6 @@ from .forms import UserCreateForm
 
 User = get_user_model() # 自作したUserモデルを使用するための宣言
 
-
-class Top(TemplateView):
-    template_name = 'top.html'
-
-
 class SignUpView(CreateView):
     form_class = UserCreateForm
     template_name = 'accounts/signup.html'

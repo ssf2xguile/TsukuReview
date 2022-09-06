@@ -22,9 +22,15 @@
                     <div class="kuchikomi mb-2">
                         <img src="{% static 'images/コメントアイコン7.png' %}" alt="コメントアイコン" class="comment-img me-2">
                         <p class="d-inline fw-bold me-2">口コミ</p>
-                        <p class="d-inline fs-4 me-2"><span class="star5_rating" data-rate="4"></span></p>
-                        <p class="d-inline fs-4 fw-bold text-primary me-2"><u>3.62</u></p>
-                        <p class="d-inline">(43件)</p>
+                        <p class="d-inline fs-4 me-2"><span class="star5_rating" id="star5-rating" data-rate="4"></span></p>
+                        <!-- レビューの計算だけJavascriptで行う -->
+                        <p class="d-inline fs-4 fw-bold text-primary me-2"><u id="calculate_result"></u></p>
+                        <p class="d-inline">({{review_count}}件)</p>
+                        <input type="hidden" id="star1" value="{{subject_data.star1}}">
+                        <input type="hidden" id="star2" value="{{subject_data.star2}}">
+                        <input type="hidden" id="star3" value="{{subject_data.star3}}">
+                        <input type="hidden" id="star4" value="{{subject_data.star4}}">
+                        <input type="hidden" id="star5" value="{{subject_data.star5}}">
                     </div>
                     <div class="whole mb-1">
                         <h4 class="kugiri-box ps-2 py-2 shadow-sm">全体情報</h4>
@@ -288,64 +294,3 @@
     </div>
 </div>
 {% endblock %}
-
-<!-- <form action="" method="post" id="post_form">
-    {% csrf_token %}
-    <div class="mb-3">
-        <label for="titleFormControlTextarea1" class="form-label">タイトル</label>
-        <textarea class="form-control" id="titleFormControlTextarea1" rows="1"
-            name="title"></textarea>
-    </div>
-    <div class="mb-3 d-flex">
-        <div class="d-inline me-4">
-            <label class="form-label">受講した年度</label>
-            <select class="form-select">
-                <option value="2023">2023年度</option>
-                <option value="2022">2022年度</option>
-                <option value="2021">2021年度</option>
-                <option value="2020">2020年度</option>
-                <option value="2019">2019年度</option>
-            </select>
-        </div>
-        <div class="d-inline me-4">
-            <label class="form-label">星</label>
-            <select class="form-select">
-                <option value="5">5</option>
-                <option value="4">4</option>
-                <option value="3">3</option>
-                <option value="2">2</option>
-                <option value="1">1</option>
-            </select>
-        </div>
-        <div class="d-inline">
-            <label class="form-label">成績</label>
-            <select class="form-select">
-                <option value="5">A+</option>
-                <option value="4">A</option>
-                <option value="3">B</option>
-                <option value="2">C</option>
-                <option value="1">D</option>
-                <option value="0">非公開</option>
-            </select>
-        </div>
-    </div>
-    <div class="mb-3">
-        <label for="overallFormControlTextarea1" class="form-label">総評</label>
-        <textarea class="form-control" id="overallFormControlTextarea1" rows="4"
-            name="overall"></textarea>
-    </div>
-    <div class="mb-3">
-        <label for="difficultyFormControlTextarea1" class="form-label">授業の難易度</label>
-        <textarea class="form-control" id="difficultyFormControlTextarea1" rows="4"
-            name="difficulty"></textarea>
-    </div>
-    <div class="mb-3">
-        <label for="kadaiFormControlTextarea1" class="form-label">課題や試験の内容・量</label>
-        <textarea class="form-control" id="kadaiFormControlTextarea1" rows="2" name="kadai"></textarea>
-    </div>
-    <div class="mb-3">
-        <label for="evaluationFormControlTextarea1" class="form-label">評価の甘さ</label>
-        <textarea class="form-control" id="evaluationFormControlTextarea1" rows="2"
-            name="evaluation"></textarea>
-    </div>
-</form> -->

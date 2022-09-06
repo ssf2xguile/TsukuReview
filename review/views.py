@@ -18,8 +18,11 @@ class LectureView(FormMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # self.kwargs['pk']でurl中の変数pkを取得できる
-        context['subject_data'] = Subject.objects.get(pk=self.kwargs['pk'])
+        subject_data = Subject.objects.get(pk=self.kwargs['pk'])
+        context['subject_data'] = subject_data
         context['review_datas'] = Review.objects.filter(lecture=self.kwargs['pk']).order_by('created_at')
+        # レビューの件数を取得
+        context['review_count'] = subject_data.star1 + subject_data.star2 + subject_data.star3 + subject_data.star4 + subject_data.star5
         context['form'] = ReviewForm()
         return context
 

@@ -23,7 +23,7 @@ class Subject(models.Model):
     star2 = models.IntegerField(verbose_name="星2",blank=False,default=0)
     star3 = models.IntegerField(verbose_name="星3",blank=False,default=0)
     star4 = models.IntegerField(verbose_name="星4",blank=False,default=0)
-    star5 = models.IntegerField(verbose_name="星5",blank=False,default=0)
+    star5 = models.IntegerField(verbose_name="星5",blank=False,default=1)
 
     def __str__(self):
         return self.code + " " + self.name
