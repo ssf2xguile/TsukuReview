@@ -6,6 +6,9 @@
 /* bodyの背景色 */
 body {
     background-color: #EFF0F5;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 /* indexページの主要画像, 画像の中央に文字を重ねる */
@@ -122,18 +125,23 @@ body {
     background-color: #ffffe6;
 }
 
-/* フッターの背景色 */
+/* フッターの設定 */
 footer {
+    margin-top: auto;
     background-color: #3D3C42;
 }
-.mynavi-btn {
-    background:#d21414; /*背景色の指定*/
-    color:#ffffff; /*テキストの色の指定*/
-    border-bottom:#800808 5px solid; /*下部の境界線の指定*/
-    width:100px; /*幅の指定*/
-    text-align:center; /*中央揃えの指定*/
-    border-radius:5px;
-    padding:10px;
+
+.forget-color {
+    color: #617B90;
+}
+
+.signup-login-color {
+    color: #0195F7;
+}
+
+.input-color {
+    background-color: #FAFAFA;
+    border-color: #E8E8E8;
 }
 
 @media (max-width:768px) {

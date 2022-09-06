@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 d-block mx-auto">
+            <div class="card mt-5 mb-2">
+                <img src="{% static 'images/TRev小ロゴ.png' %}" class="card-img-top my-3 w-50 mx-auto d-block" alt="ロゴ">
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-group mb-3">
+                            <input type="text" name="username" class="form-control input-color" placeholder="ニックネーム">
+                            {{ form.username|add_class:"form-control input-color"|attr:"placeholder:ニックネーム" }}
+                        </div>
+                        <div class="form-group mb-3">
+                            <select class="form-select input-color">
+                                <option value="" selected disabled>学類</option>
+                                <option value="2023">人文学類</option>
+                                <option value="2022">社会学類</option>
+                                <option value="2021">教育学類</option>
+                                <option value="2020">数学類</option>
+                                <option value="2019">情報科学類</option>
+                            </select>
+                        </div>
+                        <div class="form-group mb-3">
+                            <input type="email" name="email" class="form-control input-color" placeholder="メールアドレス">
+                        </div>
+                        <div class="form-group mb-3">
+                            <input type="password" name="password1" class="form-control input-color" placeholder="パスワード">
+                            {{ form.password|add_class:"form-control input-color"|attr:"placeholder:パスワード" }}
+                        </div>
+                        <div class="form-group mb-3">
+                            <input type="password" name="password2" class="form-control input-color" placeholder="確認用パスワード">
+                            {{ form.password|add_class:"form-control input-color"|attr:"placeholder:確認用パスワード" }}
+                        </div>
+                        <div class="form-group mb-5">
+                            <button type="submit" class="btn btn-primary w-100">登録する</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="card mb-5">
+                <div class="card-body">
+                    <div class="card-text text-center">
+                        <p class="d-inline">アカウントをお持ちですか？</p>
+                        <a href="{% url 'login' %}" class="text-decoration-none signup-login-color fw-bold">ログインする</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

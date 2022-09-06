@@ -1,14 +1,40 @@
 {% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
 
 {% block content %}
-
-    <h5 class="card-title text-center">ログイン</h5>
-    <form action="{% url 'login' %}" method="POST">
-        {% bootstrap_form form %}
-        <button type="submit" class="btn btn-primary btn-block">ログイン</button>
-        <input type="hidden" name="next" value="{{ next }}"/>
-        {% csrf_token %}
-    </form>
-    <a href="{% url 'password_reset' %}">パスワードをお忘れですか?</a>
-
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 d-block mx-auto">
+            <div class="card mt-5 mb-2">
+                <img src="{% static 'images/TRev小ロゴ.png' %}" class="card-img-top my-3 w-50 mx-auto d-block" alt="ロゴ">
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-group mb-3">
+                            {{ form.username|add_class:"form-control input-color"|attr:"placeholder:メールアドレス" }}
+                        </div>
+                        <div class="form-group mb-3">
+                            {{ form.password|add_class:"form-control input-color"|attr:"placeholder:パスワード" }}
+                        </div>
+                        <div class="form-group mb-5">
+                            <button type="submit" class="btn btn-primary w-100">ログイン</button>
+                        </div>
+                    </form>
+                    <div class="card-text text-center">
+                        <a href="#" class="text-decoration-none forget-color">パスワードを忘れた場合</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-5">
+                <div class="card-body">
+                    <div class="card-text text-center">
+                        <p class="d-inline">アカウントをお持ちでないですか？</p>
+                        <a href="{% url 'signup' %}" class="text-decoration-none signup-login-color fw-bold">登録する</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

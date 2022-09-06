@@ -31,12 +31,21 @@
                     <li class="nav-item me-2">
                       <a class="nav-link" aria-current="page" href="#">つくレビューとは？</a>
                     </li>
+                    {% if user.is_authenticated %}
                     <li class="nav-item me-2">
-                      <button type="button" class="btn btn-outline-primary">ログイン</button>
+                      <button type="button" class="btn btn-outline-primary" onclick="location.href='{% url 'profile' %}'">プロフィール</button>
                     </li>
                     <li class="nav-item me-2">
-                      <button type="button" class="btn btn-outline-secondary">新規登録</button>
+                      <button type="button" class="btn btn-outline-secondary" onclick="location.href='{% url 'logout' %}'">ログアウト</button>
                     </li>
+                    {% else %}
+                    <li class="nav-item me-2">
+                      <button type="button" class="btn btn-outline-primary" onclick="location.href='{% url 'login' %}'">ログイン</button>
+                    </li>
+                    <li class="nav-item me-2">
+                      <button type="button" class="btn btn-outline-secondary" onclick="location.href='{% url 'signup' %}'">新規登録</button>
+                    </li>
+                    {% endif %}
                 </ul>
               </div>
             </div>
@@ -51,7 +60,7 @@
     <footer class="text-white text-center text-lg-start">
       <!-- Copyright -->
       <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-        &copy; 2022 つくレビュー
+        Copyright&copy; 2022 つくレビュー
       </div>
       <!-- Copyright -->
     </footer>
