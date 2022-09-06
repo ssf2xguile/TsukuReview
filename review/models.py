@@ -1,11 +1,9 @@
-from concurrent.futures import thread
 from unicodedata import name
 from django.contrib.auth import validators
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
-from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.core.mail import send_mail
 from django.utils import timezone
+from accounts.models import CustomUser
 import uuid
 
 class Subject(models.Model):
@@ -55,8 +53,8 @@ class Review(models.Model):
 
     lecture  = models.ForeignKey(Subject, on_delete=models.CASCADE, default='GA13501')
     review_id = models.UUIDField(verbose_name='口コミid', primary_key=True, default=uuid.uuid4, editable=False)
-    # sender_name = models.CharField(verbose_name='投稿者名', blank=False, max_length=40)
-    # sender_college = models.CharField(verbose_name='投稿者の所属学類', blank=False, max_length=40)
+    sender_name = models.CharField(verbose_name='投稿者名', blank=False, max_length=40)
+    sender_college = models.IntegerField(verbose_name='投稿者の所属学類', choices=CustomUser.COLLEGE,blank=False, default=1)
     title = models.CharField(verbose_name='タイトル', blank=False, null=True,max_length=30)
     year = models.IntegerField(verbose_name='受講した年度', choices=YEAR, default=2022)
     rating = models.IntegerField(verbose_name='星', choices=RATING, default=5)

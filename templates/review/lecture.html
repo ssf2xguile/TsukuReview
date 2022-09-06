@@ -26,6 +26,7 @@
                         <!-- レビューの計算だけJavascriptで行う -->
                         <p class="d-inline fs-4 fw-bold text-primary me-2"><u id="calculate_result"></u></p>
                         <p class="d-inline">({{review_count}}件)</p>
+                        <!-- レビュー計算のための隠し要素 -->
                         <input type="hidden" id="star1" value="{{subject_data.star1}}">
                         <input type="hidden" id="star2" value="{{subject_data.star2}}">
                         <input type="hidden" id="star3" value="{{subject_data.star3}}">
@@ -72,14 +73,14 @@
                     <div class="card-upper-box d-flex align-items-center border-bottom">
                         <img src="{% static 'images/ユーザーアイコン1.jpg' %}" alt="ユーザーアイコン1" class="user-icon mx-2">
                         <div class="d-inline-block me-auto">
-                            <p class="small fw-bold mb-0">人文学類生 / {{review_data.get_year_display}}度受講</p>
+                            <p class="small fw-bold mb-0">{{review_data.get_sender_college_display}}生 / {{review_data.get_year_display}}度受講</p>
                             <h4 class="mb-0">{{review_data.title}}</h4>
-                            <p class="small mb-0">名無しの筑波大生</p>
+                            <p class="small mb-0">{{review_data.sender_name}}さん</p>
                             <p class="small mb-0">{{ review_data.created_at|date:"Y年n月投稿" }}</p>
                         </div>
                         <div class="d-inline-block me-2">
                             <div class="d-flex justify-content-end align-items-center">
-                                <p class="d-inline-block fs-4 me-2"><span class="star5_rating" data-rate="{{review_data.rating}}"></span></p>
+                                <p class="d-inline-block fs-4 me-2"><span class="star5_rating" data-rate="{{review_data.rating|floatformat:1}}"></span></p>
                                 <p class="d-inline-block fs-4 fw-bold text-pink">{{review_data.rating|floatformat:1}}</p>
                             </div>
                             <div class="d-flex justify-content-end align-items-center">
@@ -108,99 +109,12 @@
                 </div>
             </div>
             {% endfor %}
-
-            <div class="card comment-card my-3 shadow-sm">
-                <div class="card-body">
-                    <div class="card-upper-box d-flex align-items-center border-bottom">
-                        <img src="{% static 'images/ユーザーアイコン1.jpg' %}" alt="ユーザーアイコン1" class="user-icon mx-2">
-                        <div class="d-inline-block me-auto">
-                            <p class="small fw-bold mb-0">人文学類生 / 2020年度受講</p>
-                            <h4 class="mb-0">向き不向きがある</h4>
-                            <p class="small mb-0">名無しの筑波大生</p>
-                            <p class="small mb-0">2021年4月投稿</p>
-                        </div>
-                        <div class="d-inline-block me-2">
-                            <div class="d-flex justify-content-end align-items-center">
-                                <p class="d-inline-block fs-4 me-2"><span class="star5_rating" data-rate="4"></span></p>
-                                <p class="d-inline-block fs-4 fw-bold text-pink">4.0</p>
-                            </div>
-                            <div class="d-flex justify-content-end align-items-center">
-                                <h4>成績: 非公開</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="main-comment mx-2">
-                        <div class="comment mb-2">
-                            <h4 class="comment-color">総評</h4>
-                            <p>現代思想の入門の入門となることを目指して書かれたものであるが、著者なりの総決算となるものでもあり、おわりにでは、「これは青春の総括であり、憧れへの終幕なのです。」とまとめられている。
-                                それゆえ、著者の現代思想に関する読書遍歴あるいは研究履歴のようなところもあって、現代思想を総ざらいするというよりは、代表的な人物を著者なりの着眼点をもって整理したという内容である。
-                                そのために、網羅性という点では現代思想入門というには相応しくないところもないわけではないが、例えば最初に読むべき入門書を紹介してくれたりと、
-                                「入門の入門」としようとする配慮が十分になされており、現代思想の入門として読むには十分に意義のある一冊だと思う。</p>
-                        </div>
-                        <div class="comment mb-2">
-                            <h4 class="comment-color">授業の難易度</h4>
-                            <p>難しいです。受講生の前提知識も確認せずにいきなり専門用語を使ってきます。そのうえなんとも知っていて当然だろと言わんばかりのように話を進めていきます。</p>
-                        </div>
-                        <div class="comment mb-2">
-                            <h4 class="comment-color">課題や試験の内容・量</h4>
-                            <p>毎週の小テストが地獄です。いちいち授業動画を見ながら解かないといけない上にそもそもの授業内容が難しいので解くのにかなりの時間を要します。</p>
-                        </div>
-                        <div class="comment mb-2">
-                            <h4 class="comment-color">評価の甘さ</h4>
-                            <p>他の授業と比べても普通だと思う。</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card comment-card my-3 shadow-sm">
-                <div class="card-body">
-                    <div class="card-upper-box d-flex align-items-center border-bottom">
-                        <img src="{% static 'images/ユーザーアイコン1.jpg' %}" alt="ユーザーアイコン1" class="user-icon mx-2">
-                        <div class="d-inline-block me-auto">
-                            <p class="small fw-bold mb-0">情報科学類生 / 2020年度受講</p>
-                            <h4 class="mb-0">こんなんでDつけられるなんてたまったもんじゃない</h4>
-                            <p class="small mb-0">名無しの筑波大生</p>
-                            <p class="small mb-0">2021年4月投稿</p>
-                        </div>
-                        <div class="d-inline-block me-2">
-                            <div class="d-flex justify-content-end align-items-center">
-                                <p class="d-inline-block fs-4 me-2"><span class="star5_rating" data-rate="4"></span></p>
-                                <p class="d-inline-block fs-4 fw-bold text-pink">4.0</p>
-                            </div>
-                            <div class="d-flex justify-content-end align-items-center">
-                                <h4>成績: D</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="main-comment mx-2">
-                        <div class="comment mb-2">
-                            <h4 class="comment-color">総評</h4>
-                            <p>現代思想の入門の入門となることを目指して書かれたものであるが、著者なりの総決算となるものでもあり、おわりにでは、「これは青春の総括であり、憧れへの終幕なのです。」とまとめられている。
-                                それゆえ、著者の現代思想に関する読書遍歴あるいは研究履歴のようなところもあって、現代思想を総ざらいするというよりは、代表的な人物を著者なりの着眼点をもって整理したという内容である。
-                                そのために、網羅性という点では現代思想入門というには相応しくないところもないわけではないが、例えば最初に読むべき入門書を紹介してくれたりと、
-                                「入門の入門」としようとする配慮が十分になされており、現代思想の入門として読むには十分に意義のある一冊だと思う。</p>
-                        </div>
-                        <div class="comment mb-2">
-                            <h4 class="comment-color">授業の難易度</h4>
-                            <p>難しいです。受講生の前提知識も確認せずにいきなり専門用語を使ってきます。そのうえなんとも知っていて当然だろと言わんばかりのように話を進めていきます。</p>
-                        </div>
-                        <div class="comment mb-2">
-                            <h4 class="comment-color">課題や試験の内容・量</h4>
-                            <p>毎週の小テストが地獄です。いちいち授業動画を見ながら解かないといけない上にそもそもの授業内容が難しいので解くのにかなりの時間を要します。</p>
-                        </div>
-                        <div class="comment mb-2">
-                            <h4 class="comment-color">評価の甘さ</h4>
-                            <p>他の授業と比べても普通だと思う。</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
 
 <!-- モーダル処理 -->
+{% if user.is_authenticated %}
 <div class="modal fade" id="exampleModalToggle1" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
     tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
@@ -281,6 +195,12 @@
                         {{form.evaluation.errors.0}}
                     </div>
                     <div class="field d-none">
+                        {{form.sender_name|add_class:"form-control"|attr:"id:sender_name"}}
+                        {{form.sender_college|add_class:"form-select"|attr:"id:sender_college"}}
+                        <input type="hidden" id="sender_name_dummy" value="{{user.username}}">
+                        <input type="hidden" id="sender_college_dummy" value="{{user.college}}">
+                    </div>
+                    <div class="field d-none">
                         <button type="submit" id="hidden-submit-button">送信</button>
                     </div>
                 </form>
@@ -293,4 +213,23 @@
         </div>
     </div>
 </div>
+{% else %}
+<div class="modal fade" id="exampleModalToggle1" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+    tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalToggleLabel">注意！</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body modal-precautions">
+                <p>ログインしてから投稿してください。</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="location.href='{% url 'login' %}'">ログイン</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
 {% endblock %}

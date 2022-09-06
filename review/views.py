@@ -43,10 +43,21 @@ class LectureView(FormMixin, DetailView):
         #2 lectureにインスタンスを渡す
         #3 オブジェクトを作成し、値を代入する(今回は辞書ごと)
         #4 オブジェクトを保存する
+        subject_data = Subject.objects.get(pk=self.kwargs['pk'])
         data = form.cleaned_data
         data['lecture'] = Subject.objects.get(pk=self.kwargs['pk'])
         obj = Review(**data)
         obj.save()
+        if data['rating'] == 1:
+            Subject.objects.filter(pk=self.kwargs['pk']).update(star1=subject_data.star1+1)
+        elif data['rating'] == 2:
+            Subject.objects.filter(pk=self.kwargs['pk']).update(star2=subject_data.star2+1)
+        elif data['rating'] == 3:
+            Subject.objects.filter(pk=self.kwargs['pk']).update(star3=subject_data.star3+1)
+        elif data['rating'] == 4:
+            Subject.objects.filter(pk=self.kwargs['pk']).update(star4=subject_data.star4+1)
+        elif data['rating'] == 5:
+            Subject.objects.filter(pk=self.kwargs['pk']).update(star5=subject_data.star5+1)
         return super().form_valid(form)
 
     def form_invalid(self, form):
