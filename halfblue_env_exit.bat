@@ -1,2 +1,3 @@
-cd "D:\プログラミング\MyPython\virtual_environment\halfblue_env\Scripts"
+
+cd "D:\繝励Ο繧ｰ繝ｩ繝溘Φ繧ｰ\MyPython\virtual_environment\halfblue_env\Scripts"
 deactivate

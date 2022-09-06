@@ -12,29 +12,20 @@
                     <form method="post">
                         {% csrf_token %}
                         <div class="form-group mb-3">
-                            <input type="text" name="username" class="form-control input-color" placeholder="ニックネーム">
                             {{ form.username|add_class:"form-control input-color"|attr:"placeholder:ニックネーム" }}
                         </div>
                         <div class="form-group mb-3">
-                            <select class="form-select input-color">
-                                <option value="" selected disabled>学類</option>
-                                <option value="2023">人文学類</option>
-                                <option value="2022">社会学類</option>
-                                <option value="2021">教育学類</option>
-                                <option value="2020">数学類</option>
-                                <option value="2019">情報科学類</option>
-                            </select>
+                            {{ form.college|add_class:"form-select input-color" }}
                         </div>
                         <div class="form-group mb-3">
-                            <input type="email" name="email" class="form-control input-color" placeholder="メールアドレス">
+                            {{ form.email|add_class:"form-control input-color"|attr:"placeholder:メールアドレス" }}
+                            {{ form.email.errors }}
                         </div>
                         <div class="form-group mb-3">
-                            <input type="password" name="password1" class="form-control input-color" placeholder="パスワード">
-                            {{ form.password|add_class:"form-control input-color"|attr:"placeholder:パスワード" }}
+                            {{ form.password1|add_class:"form-control input-color"|attr:"placeholder:パスワード" }}
                         </div>
                         <div class="form-group mb-3">
-                            <input type="password" name="password2" class="form-control input-color" placeholder="確認用パスワード">
-                            {{ form.password|add_class:"form-control input-color"|attr:"placeholder:確認用パスワード" }}
+                            {{ form.password2|add_class:"form-control input-color"|attr:"placeholder:確認用パスワード" }}
                         </div>
                         <div class="form-group mb-5">
                             <button type="submit" class="btn btn-primary w-100">登録する</button>

@@ -69,6 +69,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
             ],
         },
     },
@@ -104,6 +105,11 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
+]
+
+AUTHENTICATION_BACKENDS = [
+     'django.contrib.auth.backends.ModelBackend',
+     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 
@@ -153,3 +159,6 @@ ACCOUNT_USERNAME_REQUIRED = False
 # ユーザ登録時に確認メールを送信するか(none=送信しない, mandatory=送信する)
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_EMAIL_REQUIRED = True   # ユーザ登録にメルアド必須にする
+
+# ローカルでの開発のためメールをコンソールに出力する
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 

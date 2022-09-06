@@ -62,10 +62,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     )
     username_validator = UnicodeUsernameValidator()
 
-    username = models.CharField('ユーザー名',max_length=150,
-        blank=True,
+    username = models.CharField('ユーザー名',max_length=30,
+        blank=False,
     )
-    email = models.EmailField('メールアドレス', unique=True)
+    email = models.EmailField('メールアドレス', max_length=40,unique=True)
     college = models.IntegerField('学類', choices=COLLEGE, default=1)
     is_staff = models.BooleanField(
         ('staff status'),
