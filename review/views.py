@@ -10,6 +10,11 @@ from .forms import ReviewForm
 class IndexView(TemplateView):
     template_name = 'review/index.html'
 
+class SearchView(ListView):
+    model = Subject
+    template_name = 'review/search.html'
+    paginate_by = 10
+
 class LectureView(FormMixin, DetailView):
     model = Subject
     form_class = ReviewForm

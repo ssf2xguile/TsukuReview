@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <img src="{% static 'images/TRev大ロゴ.png' %}" alt="img" class="mx-auto d-block w-25 my-4">
+            <div class="input-group my-3">
+                <span class="input-group-text">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                    </svg>
+                </span>
+                <input v-on:input="inputEvent" type="text" class="form-control" placeholder="科目番号は前方一致、科目名は正規表現に対応">
+                <child-component v-on:childevent="searchMethod"></child-component>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card-body mb-3">
+                <h3 class="card-title">科目名</h3>
+                <h4 class="fw-normal">科目番号</h4>
+                <div class="kuchikomi mb-2">
+                    <img src="{% static 'images/コメントアイコン7.png' %}" alt="コメントアイコン" class="comment-img me-2">
+                    <p class="d-inline fw-bold me-2">口コミ</p>
+                    <p class="d-inline fs-4 me-2"><span class="star5_rating" id="star5-rating" data-rate="4"></span></p>
+                    <!-- レビューの計算だけJavascriptで行う -->
+                    <p class="d-inline fs-4 fw-bold text-primary me-2"><u id="calculate_result"></u></p>
+                    <p class="d-inline">(4件)</p>
+                    <!-- レビュー計算のための隠し要素 -->
+                    <input type="hidden" id="star1" value="{subject_data.star1}}">
+                    <input type="hidden" id="star2" value="{subject_data.star2}}">
+                    <input type="hidden" id="star3" value="{subject_data.star3}}">
+                    <input type="hidden" id="star4" value="{subject_data.star4}}">
+                    <input type="hidden" id="star5" value="{subject_data.star5}}">
+                </div>
+                <div class="whole mb-1">
+                    <h4 class="kugiri-box ps-2 py-2 shadow-sm">全体情報</h4>
+                    <div class="d-flex">
+                        <p class="d-inline me-4">単位: 2.0<br>履修年次: 2年</p>
+                        <p class="d-inline me-4">学期: 春AB<br>対象学類: が狂い</p>
+                        <p class="d-inline">担当教員: 古川</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
