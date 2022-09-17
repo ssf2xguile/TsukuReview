@@ -3,49 +3,84 @@
 
 {% block content %}
 <div class="container">
-    <div class="row">
-        <div class="col">
-            <img src="{% static 'images/TRev大ロゴ.png' %}" alt="img" class="mx-auto d-block w-25 my-4">
-            <div class="input-group my-3">
-                <span class="input-group-text">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
-                        viewBox="0 0 16 16">
-                        <path
-                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                    </svg>
-                </span>
-                <input v-on:input="inputEvent" type="text" class="form-control" placeholder="科目番号は前方一致、科目名は正規表現に対応">
-                <child-component v-on:childevent="searchMethod"></child-component>
+    <div id="search_app">
+        <div class="row">
+            <div class="col">
+                <img src="{% static 'images/TRev大ロゴ.png' %}" alt="img" class="mx-auto d-block w-25 my-4">
+                <div class="input-group my-3">
+                    <span class="input-group-text">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-search" viewBox="0 0 16 16">
+                            <path
+                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                        </svg>
+                    </span>
+                    <input v-on:input="inputEvent" type="text" class="form-control" placeholder="科目番号は前方一致、科目名は正規表現に対応">
+                </div>
+                <div v-if="!query" class="text-center my-3">
+                    自分に合った授業を履修して
+                    <br class="mobile-only">
+                    よりよいキャンパスライフを楽しもう！
+                </div>
             </div>
         </div>
-        <div class="col-md-8">
-            <div class="card-body mb-3">
-                <h3 class="card-title">科目名</h3>
-                <h4 class="fw-normal">科目番号</h4>
-                <div class="kuchikomi mb-2">
-                    <img src="{% static 'images/コメントアイコン7.png' %}" alt="コメントアイコン" class="comment-img me-2">
-                    <p class="d-inline fw-bold me-2">口コミ</p>
-                    <p class="d-inline fs-4 me-2"><span class="star5_rating" id="star5-rating" data-rate="4"></span></p>
-                    <!-- レビューの計算だけJavascriptで行う -->
-                    <p class="d-inline fs-4 fw-bold text-primary me-2"><u id="calculate_result"></u></p>
-                    <p class="d-inline">(4件)</p>
-                    <!-- レビュー計算のための隠し要素 -->
-                    <input type="hidden" id="star1" value="{subject_data.star1}}">
-                    <input type="hidden" id="star2" value="{subject_data.star2}}">
-                    <input type="hidden" id="star3" value="{subject_data.star3}}">
-                    <input type="hidden" id="star4" value="{subject_data.star4}}">
-                    <input type="hidden" id="star5" value="{subject_data.star5}}">
-                </div>
-                <div class="whole mb-1">
-                    <h4 class="kugiri-box ps-2 py-2 shadow-sm">全体情報</h4>
-                    <div class="d-flex">
-                        <p class="d-inline me-4">単位: 2.0<br>履修年次: 2年</p>
-                        <p class="d-inline me-4">学期: 春AB<br>対象学類: が狂い</p>
-                        <p class="d-inline">担当教員: 古川</p>
+
+        <!-- 検索結果（検索ボックスに文字が入力されているときのみ表示） -->
+        <div v-show="query">
+            <div class="row">
+                <div class="col-md-10 mx-auto">
+                    <div class="card card-radius d-flex my-3 shadow-sm" v-for="sub in results">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <!--空のdivクラスを用意し、d-flexを適用する(子要素を上下左右中央揃え)-->
+                                <div class="d-flex align-items-center justify-content-center w-100 h-100 py-3">
+                                    <!--学類ごとのカラーや配置を設定-->
+                                    <div class="college-img-small">
+                                        <h2>[[sub.schools]]</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="card-body">
+                                    <a class="card-title fs-3 text-dark" :href="/lecture/ + [[sub.code]] + '/'">[[sub.name]]</a>
+                                    <h4 class="fw-normal">[[sub.code]]</h4>
+                                    <p class="d-inline text-secondary">単位: [[sub.unit]], 履修年次: [[sub.grade]]年, 学期: [[sub.semester]], 担当教員: [[readmoreFilter(sub.teachers, 20, "...")]]</p>
+                                    <div class="kuchikomi mb-2">
+                                        <img src="{% static 'images/コメントアイコン7.png' %}" alt="コメントアイコン"
+                                            class="comment-img me-2">
+                                        <p class="d-inline fw-bold me-2">口コミ</p>
+                                        <p class="d-inline fs-4 me-2"><span class="star5_rating" id="star5-rating"
+                                                data-rate="4"></span>
+                                        </p>
+                                        <!-- レビューの計算だけJavascriptで行う -->
+                                        <p class="d-inline fs-4 fw-bold text-primary me-2"><u id="calculate_result"></u>
+                                        </p>
+                                        <p class="d-inline">([[sub.review_count]]件)</p>
+                                        <!-- レビュー計算のための隠し要素 -->
+                                        <input type="hidden" id="star1" value="[[sub.star1]]">
+                                        <input type="hidden" id="star2" value="[[sub.star2]]">
+                                        <input type="hidden" id="star3" value="[[sub.star3]]">
+                                        <input type="hidden" id="star4" value="[[sub.star4]]">
+                                        <input type="hidden" id="star5" value="[[sub.star5]]">
+                                    </div>
+                                    <p class="d-inline text-secondary">[[sub.colleges]]</p>
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block script %}
+<!-- Axios -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- Vue.js 3 DEV VERSION-->
+<script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
+<script src="{% static 'js/search.js' %}"></script>
+<script src="{% static 'js/calcurate.js' %}"></script>
 {% endblock %}

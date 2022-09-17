@@ -4,6 +4,7 @@ function form_submit() {
     submitButton.click();
 }
 
+// 講義の評価を計算するための関数
 document.addEventListener('DOMContentLoaded', function review_calculator() {
     const star1 = parseInt(document.getElementById("star1").value, 10);
     const star2 = parseInt(document.getElementById("star2").value, 10);

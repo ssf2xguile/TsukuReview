@@ -56,6 +56,18 @@ body {
     align-items: center;
 }
 
+.college-img-small {
+    width: 80%;
+    height: 200px;
+    border-radius: 2rem;
+    background-color: rgb(146, 223, 98);
+
+    /* フレックス要素で上下左右中央揃え */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* コメントアイコンのサイズ調整 */
 .comment-img {
     width: 40px;
