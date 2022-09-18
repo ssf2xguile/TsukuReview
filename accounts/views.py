@@ -24,10 +24,13 @@ class LoginView(LoginView):
 class LogoutView(LogoutView):
     template_name = 'accounts/logout.html'
 
-class ProfileView(LoginRequiredMixin, View):
+class ProfileView(LoginRequiredMixin, TemplateView):
+    template_name = 'accounts/profile.html'
 
-    def get(self, *args, **kwargs):
-        return render(self.request,'registration/profile.html')
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user'] = self.request.user
+        return context
 
 
 class DeleteView(LoginRequiredMixin, View):

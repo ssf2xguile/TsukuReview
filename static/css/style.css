@@ -60,12 +60,92 @@ body {
     width: 80%;
     height: 200px;
     border-radius: 2rem;
-    background-color: rgb(146, 223, 98);
 
     /* フレックス要素で上下左右中央揃え */
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.color-light-green {
+    background-color: #62FF67;
+}
+
+.color-pastel-green {
+    background-color: #C4DFAA;
+}
+
+.color-pale-pink {
+    background-color: #F4BFBF;
+}
+
+.color-pink {
+    background-color: #FF62BB;
+}
+
+.color-pale-red {
+    background-color: #FF6262;
+}
+
+.color-white-blue {
+    background-color: #B9FFF8;
+}
+
+.color-dark-blue {
+    background-color: #6290FF;
+}
+
+.color-navy {
+    color: white;
+    background-color: #161E54;
+}
+
+.color-beige {
+    background-color: #F9F5EB;
+}
+
+.color-pale-teal {
+    background-color: #CEE5D0;
+}
+
+.color-teal {
+    background-color: #A7D2CB;
+}
+
+.color-brown {
+    background-color: #CA955C;
+}
+
+.color-orange {
+    background-color: #FFBB62;
+}
+
+.color-vintage-orange {
+    background-color: #F8B400;
+}
+
+.color-yellow {
+    background-color: #F5FF62;
+}
+
+.color-pale-purple {
+    background-color: #B1B2FF;
+}
+
+.color-purple {
+    background-color: #8758FF;
+}
+
+.color-pale-gray {
+    background-color: #DFDFDE;
+}
+
+.color-vintage-orange {
+    background-color: #FFA62F;
+}
+
+.serach-result {
+    background-color: #6600CD;
 }
 
 /* コメントアイコンのサイズ調整 */
@@ -175,6 +255,10 @@ footer {
 
     .college-img {
         height: 100px;
+    }
+
+    .college-img-small {
+        height: 50px;
     }
 
     .comment-img {
