@@ -13,14 +13,19 @@
 さんが公開している[kdb.json](https://github.com/Make-IT-TSUKUBA/alternative-tsukuba-kdb/blob/master/src/kdb.json)をMPL-2.0 licenseのもとで利用しております。
 
 ## 環境構築
-1. 必要パッケージの用意
+1. 仮想環境の構築  
+仮想環境を構築し、仮想環境に入ります。仮想環境のフォルダを構築する場所はどこでも構いません。
 ```
-pip install -r requirements.txt
+python -m venv env_review
+cd env_review/Scripts
+activate
 ```
+仮想環境から抜け出す際は`deactivate`とコマンドを打ちます。
 
-2. manage.pyが置いてあるディレクトリ(TsukuReview)に入りバッチファイルでマイグレーション・DBに初期データ追加を行います。
+2. manage.pyが置いてあるディレクトリ(TsukuReview)に入り、必要なライブラリをインストールしバッチファイルでマイグレーション・DBに初期データ追加を行います。
 ```
 cd TsukuReview
+pip install -r requirements.txt
 init.bat
 ```
 ※バッチファイルが上手く動作しなかったとき用コマンド  
