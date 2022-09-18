@@ -236,6 +236,37 @@ footer {
     border-color: #E8E8E8;
 }
 
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+  
+table tr{
+    border-bottom: solid 2px white;
+}
+  
+table tr:last-child{
+    border-bottom: none;
+}
+  
+table th{
+    text-align: left;
+    width: 30%;
+    background-color: #52c2d0;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+  
+table td{
+    text-align: left;
+    width: 70%;
+    text-align: center;
+    background-color: #eee;
+    padding: 10px 0;
+}
+
 @media (max-width:768px) {
     /* indexページの主要画像, 画像の中央に文字を重ねる */
     .index-main img{
