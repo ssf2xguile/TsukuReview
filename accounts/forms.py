@@ -40,9 +40,10 @@ class UserCreateForm(UserCreationForm):
 
     def clean_username(self):
         username = self.cleaned_data['username']
-        print(username)
         if len(username) <= 1:
             raise forms.ValidationError('名前が短すぎます')
+        if not username.encode('utf-8').isalnum():
+            raise forms.ValidationError('ユーザ名は英数字のみで入力してください')
         return username
 
     def clean_email(self):
@@ -69,9 +70,11 @@ class UserLoginForm(AuthenticationForm):
     def clean(self):
         username = self.cleaned_data['username']
         password = self.cleaned_data['password']
+        print(username)
         try:
-            user = CustomUser.objects.get(email=username)
-        except CustomUser.DoesNotExist:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            print("if1")
             raise forms.ValidationError('メールアドレスまたはパスワードが間違っています')
         if user.password != password:
             raise forms.ValidationError('メールアドレスまたはパスワードが間違っています')
