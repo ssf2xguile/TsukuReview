@@ -10,3 +10,11 @@ class SearchSubjectAPI(ListAPIView):
     def get_queryset(self):
         q :str = self.request.query_params.get("q", "")
         return Subject.objects.filter(Q(name__icontains = q)|Q(code__startswith = q)|Q(teachers__icontains = q)).order_by('code')[:200]
+
+class GetSubjectAPI(ListAPIView):
+    serializer_class = GetSubjectSerializer
+
+    # 科目番号で前方一致検索を行う
+    def get_queryset(self):
+        q :str = self.request.query_params.get("q", "")
+        return Subject.objects.filter(Q(code__startswith = q)).order_by('code')[:1]

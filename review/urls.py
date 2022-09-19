@@ -7,4 +7,5 @@ urlpatterns = [
     path('lecture/<str:pk>/', views.LectureView.as_view(), name='lecture'),
     path('search/', views.SearchView.as_view(), name='search'),
     path('api/search_subjects', apis.SearchSubjectAPI.as_view(), name = "api_search_subjects"),
+    path('api/get_subject', apis.GetSubjectAPI.as_view(), name = "api_get_subject"),
 ]

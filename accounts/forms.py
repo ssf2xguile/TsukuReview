@@ -24,12 +24,11 @@ class ProfileUpdateForm(forms.ModelForm):
         if username:
             self.fields['username'].widget.attrs['value'] = username
         if college:
-            self.fields['college'].widget.attrs['value'] = college
+            self.fields['college'].initial = college
     
     def update(self, user):
         user.username = self.cleaned_data['username']
         user.college = self.cleaned_data['college']
-        user.last_name = self.cleaned_data['last_name']
         user.save()
 
 class UserCreateForm(UserCreationForm):

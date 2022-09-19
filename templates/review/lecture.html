@@ -10,54 +10,53 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
     {% endif %}
-
-    <div class="card card-radius d-flex my-3 shadow-sm">
-        <div class="row">
-            <div class="col-md-4">
-                <!--空のdivクラスを用意し、d-flexを適用する(子要素を上下左右中央揃え)-->
-                <div class="d-flex align-items-center justify-content-center w-100 h-100 py-3">
-                    <!--学類ごとのカラーや配置を設定-->
-                    <div class="college-img">
-                        <h1>{{subject_data.schools}}</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h3 class="card-title">{{subject_data.name}}</h3>
-                    <h4 class="fw-normal">{{subject_data.code}}</h4>
-                    <div class="kuchikomi mb-2">
-                        <img src="{% static 'images/コメントアイコン7.png' %}" alt="コメントアイコン" class="comment-img me-2">
-                        <p class="d-inline fw-bold me-2">口コミ</p>
-                        <p class="d-inline fs-4 me-2"><span class="star5_rating" id="star5-rating" data-rate="4"></span>
-                        </p>
-                        <!-- レビューの計算だけJavascriptで行う -->
-                        <p class="d-inline fs-4 fw-bold text-primary me-2"><u id="calculate_result"></u></p>
-                        <p class="d-inline">({{review_count}}件)</p>
-                        <!-- レビュー計算のための隠し要素 -->
-                        <input type="hidden" id="star1" value="{{subject_data.star1}}">
-                        <input type="hidden" id="star2" value="{{subject_data.star2}}">
-                        <input type="hidden" id="star3" value="{{subject_data.star3}}">
-                        <input type="hidden" id="star4" value="{{subject_data.star4}}">
-                        <input type="hidden" id="star5" value="{{subject_data.star5}}">
-                    </div>
-                    <div class="whole mb-1">
-                        <h4 class="kugiri-box ps-2 py-2 shadow-sm">全体情報</h4>
-                        <div class="d-flex">
-                            <p class="d-inline me-4">単位: {{subject_data.unit}}<br>履修年次: {{subject_data.grade}}年</p>
-                            <p class="d-inline me-4">学期: {{subject_data.semester}}<br>対象学類: {{subject_data.colleges}}
-                            </p>
-                            <p class="d-inline">担当教員: {{subject_data.teachers | truncatechars:20}}</p>
+    <input type="hidden" id="lecture_code" value="{{subject_data.code}}">
+    <div id="lecture_app">
+        <div class="card card-radius d-flex my-3 shadow-sm">
+            <div class="row">
+                <div class="col-md-4">
+                    <!--空のdivクラスを用意し、d-flexを適用する(子要素を上下左右中央揃え)-->
+                    <div class="d-flex align-items-center justify-content-center w-100 h-100 py-3">
+                        <!--学類ごとのカラーや配置を設定-->
+                        <div :class="getSchoolsClass(sub.schools)"> 
+                            <h2>[[SimplifySchoolsName(sub.schools)]]</h2>
                         </div>
                     </div>
-                    <div class="concept mb-3">
-                        <h4 class="kugiri-box ps-2 py-2 shadow-sm">授業概要</h4>
-                        <p class="card-text">{{subject_data.overview}}</p>
-                    </div>
-                    <div class="other mb-3">
-                        <h4 class="kugiri-box ps-2 py-2 shadow-sm">その他情報</h4>
-                        <a href="https://kdb.tsukuba.ac.jp/syllabi/2022/{{subject_data.code}}/jpn" target="_blank"
-                            class="text-info">シラバスを参照</a>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h3 class="card-title">[[sub.name]]</h3>
+                        <h4 class="fw-normal">[[sub.code]]</h4>
+                        <div class="kuchikomi mb-2">
+                            <img src="{% static 'images/コメントアイコン7.png' %}" alt="コメントアイコン" class="comment-img me-2">
+                            <p class="d-inline fw-bold me-2">口コミ</p>
+                            <p class="d-inline fs-4 me-2"><span class="star5_rating" id="star5-rating"
+                                :data-rate="[[DataRatingCalculation1(sub.star1, sub.star2, sub.star3, sub.star4, sub.star5)]]"></span>
+                            </p>
+                            <!-- レビューの計算を行う -->
+                            <p class="d-inline fs-4 fw-bold text-primary me-2"><u id="calculate_result">[[DataRatingCalculation2(sub.star1, sub.star2, sub.star3, sub.star4, sub.star5)]]</u>
+                            </p>
+                            <p class="d-inline">([[RatingCount(sub.star1, sub.star2, sub.star3, sub.star4, sub.star5)]]件)</p>
+                        </div>
+                        <div class="whole mb-1">
+                            <h4 class="kugiri-box ps-2 py-2 shadow-sm">全体情報</h4>
+                            <div class="d-flex">
+                                <p class="d-inline me-4">単位: [[sub.unit]]<br>履修年次: [[sub.grade]]年</p>
+                                <p class="d-inline me-4">学期: [[ValidateData(sub.semester)]]<br>対象学類:
+                                    [[ValidateData(sub.colleges)]]
+                                </p>
+                                <p class="d-inline">担当教員: {{subject_data.teachers | truncatechars:20}}</p>
+                            </div>
+                        </div>
+                        <div class="concept mb-3">
+                            <h4 class="kugiri-box ps-2 py-2 shadow-sm">授業概要</h4>
+                            <p class="card-text">[[ValidateData(sub.overview)]]</p>
+                        </div>
+                        <div class="other mb-3">
+                            <h4 class="kugiri-box ps-2 py-2 shadow-sm">その他情報</h4>
+                            <a :href="'https://kdb.tsukuba.ac.jp/syllabi/2022/'+sub.code+'/jpn'" target="_blank"
+                                class="text-info">シラバスを参照</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -265,6 +264,9 @@
 {% endblock %}
 
 {% block script %}
-<script src="{% static 'js/send.js' %}"></script>
-<script src="{% static 'js/calcurate.js' %}"></script>
+<!-- Axios -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- Vue.js 3 DEV VERSION-->
+<script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
+<script src="{% static 'js/lecture.js' %}"></script>
 {% endblock %}
