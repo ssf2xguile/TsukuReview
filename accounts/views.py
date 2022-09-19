@@ -9,7 +9,7 @@ from django.contrib.auth import (
 )
 
 from accounts.models import CustomUser
-from .forms import UserCreateForm, ProfileUpdateForm, MyPasswordChangeForm
+from .forms import UserCreateForm, ProfileUpdateForm, MyPasswordChangeForm, UserLoginForm
 
 User = get_user_model() # 自作したUserモデルを使用するための宣言
 
@@ -23,6 +23,7 @@ class SignUpView(CreateView):
 
 class LoginView(LoginView):
     template_name = 'accounts/login.html'
+    authentication_form = UserLoginForm
 
 class LogoutView(LogoutView):
     template_name = 'accounts/logout.html'

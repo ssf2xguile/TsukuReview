@@ -12,6 +12,15 @@ Vue.createApp({
             inputDifficulty: "",
             inputKadai: "",
             inputEvaluation: "",
+            submitbutton: "",
         }
     },
+    method: {
+        form_submit() {
+            this.submitbutton.click();
+        }
+    },
+    mounted() {
+        this.submitbutton = document.getElementById('hidden-submit-button');
+    }
 }).mount('#send_app');

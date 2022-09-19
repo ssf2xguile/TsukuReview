@@ -16,6 +16,7 @@
                         </div>
                         <div class="form-group mb-3">
                             {{ form.password|add_class:"form-control input-color"|attr:"placeholder:パスワード" }}
+                            <p class="error-message">{{ form.non_field_errors.0 }}</p>
                         </div>
                         <div class="form-group mb-5">
                             <button type="submit" class="btn btn-primary w-100">ログイン</button>

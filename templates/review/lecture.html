@@ -170,7 +170,7 @@
                         <div class="mb-3">
                             <label for="titleFormControlTextarea1" class="form-label">タイトル</label>
                             {{form.title|add_class:"form-control"|attr:"id:titleFormControlTextarea1"|attr:"rows:1"|attr:"v-model.trim:inputTitle"}}
-                            {{form.title.errors.0}}
+                            <p class="error-message">{{ form.title.errors.0 }}</p>
                             <div class="text-end">
                                 <p class="text-secondary">残り [[ 30 - inputTitle.length ]] 文字</p>
                             </div>
@@ -192,7 +192,7 @@
                         <div class="mb-3">
                             <label for="overallFormControlTextarea1" class="form-label">総評</label>
                             {{form.overall|add_class:"form-control"|attr:"id:overallFormControlTextarea1"|attr:"rows:4"|attr:"v-model.trim:inputOverall"}}
-                            {{form.overall.errors.0}}
+                            <p class="error-message">{{ form.overall.errors.0 }}</p>
                             <div class="text-end">
                                 <p class="text-secondary">残り [[ 500 - inputOverall.length ]] 文字</p>
                             </div>
@@ -200,7 +200,7 @@
                         <div class="mb-3">
                             <label for="difficultyFormControlTextarea1" class="form-label">授業の難易度</label>
                             {{form.difficulty|add_class:"form-control"|attr:"id:difficultyFormControlTextarea1"|attr:"rows:4"|attr:"v-model.trim:inputDifficulty"}}
-                            {{form.difficulty.errors.0}}
+                            <p class="error-message">{{ form.difficulty.errors.0 }}</p>
                             <div class="text-end">
                                 <p class="text-secondary">残り [[ 100 - inputDifficulty.length ]] 文字</p>
                             </div>
@@ -208,7 +208,7 @@
                         <div class="mb-3">
                             <label for="kadaiFormControlTextarea1" class="form-label">課題や試験の内容・量</label>
                             {{form.kadai|add_class:"form-control"|attr:"id:kadaiFormControlTextarea1"|attr:"rows:2"|attr:"v-model.trim:inputKadai"}}
-                            {{form.kadai.errors.0}}
+                            <p class="error-message">{{ form.kadai.errors.0 }}</p>
                             <div class="text-end">
                                 <p class="text-secondary">残り [[ 100 - inputKadai.length ]] 文字</p>
                             </div>
@@ -216,7 +216,7 @@
                         <div class="mb-3">
                             <label for="evaluationFormControlTextarea1" class="form-label">評価の甘さ</label>
                             {{form.evaluation|add_class:"form-control"|attr:"id:evaluationFormControlTextarea1"|attr:"rows:2"|attr:"v-model.trim:inputEvaluation"}}
-                            {{form.evaluation.errors.0}}
+                            <p class="error-message">{{ form.evaluation.errors.0 }}</p>
                             <div class="text-end">
                                 <p class="text-secondary">残り [[ 100 - inputEvaluation.length ]] 文字</p>
                             </div>
@@ -236,7 +236,7 @@
                 <div class="modal-footer">
                     <button class="btn btn-secondary" data-bs-target="#exampleModalToggle1" data-bs-toggle="modal"
                         data-bs-dismiss="modal">戻る</button>
-                    <button class="btn btn-primary" onclick="form_submit()" id="modal-send-button">投稿する</button>
+                    <button class="btn btn-primary" v-on:click="form_submit" id="modal-send-button">投稿する</button>
                 </div>
             </div>
         </div>
@@ -269,4 +269,5 @@
 <!-- Vue.js 3 DEV VERSION-->
 <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
 <script src="{% static 'js/lecture.js' %}"></script>
+<script src="{% static 'js/send.js' %}"></script>
 {% endblock %}

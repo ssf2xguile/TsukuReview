@@ -267,6 +267,11 @@ table td{
     padding: 10px 0;
 }
 
+.error-message{
+    color: red;
+    font-size: 0.8rem;
+}
+
 @media (max-width:768px) {
     /* indexページの主要画像, 画像の中央に文字を重ねる */
     .index-main img{
