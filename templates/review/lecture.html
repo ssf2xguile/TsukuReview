@@ -18,7 +18,7 @@
                     <!--空のdivクラスを用意し、d-flexを適用する(子要素を上下左右中央揃え)-->
                     <div class="d-flex align-items-center justify-content-center w-100 h-100 py-3">
                         <!--学類ごとのカラーや配置を設定-->
-                        <div :class="getSchoolsClass(sub.schools)"> 
+                        <div :class="getSchoolsClass(sub.schools)">
                             <h2>[[SimplifySchoolsName(sub.schools)]]</h2>
                         </div>
                     </div>
@@ -31,12 +31,15 @@
                             <img src="{% static 'images/コメントアイコン7.png' %}" alt="コメントアイコン" class="comment-img me-2">
                             <p class="d-inline fw-bold me-2">口コミ</p>
                             <p class="d-inline fs-4 me-2"><span class="star5_rating" id="star5-rating"
-                                :data-rate="[[DataRatingCalculation1(sub.star1, sub.star2, sub.star3, sub.star4, sub.star5)]]"></span>
+                                    :data-rate="[[DataRatingCalculation1(sub.star1, sub.star2, sub.star3, sub.star4, sub.star5)]]"></span>
                             </p>
                             <!-- レビューの計算を行う -->
-                            <p class="d-inline fs-4 fw-bold text-primary me-2"><u id="calculate_result">[[DataRatingCalculation2(sub.star1, sub.star2, sub.star3, sub.star4, sub.star5)]]</u>
+                            <p class="d-inline fs-4 fw-bold text-primary me-2"><u
+                                    id="calculate_result">[[DataRatingCalculation2(sub.star1, sub.star2, sub.star3,
+                                    sub.star4, sub.star5)]]</u>
                             </p>
-                            <p class="d-inline">([[RatingCount(sub.star1, sub.star2, sub.star3, sub.star4, sub.star5)]]件)</p>
+                            <p class="d-inline">([[RatingCount(sub.star1, sub.star2, sub.star3, sub.star4,
+                                sub.star5)]]件)</p>
                         </div>
                         <div class="whole mb-1">
                             <h4 class="kugiri-box ps-2 py-2 shadow-sm">全体情報</h4>
@@ -154,17 +157,17 @@
         </div>
     </div>
 </div>
-<div id="send_app">
-    <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
-        tabindex="-1" data-bs-backdrop="static">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalToggleLabel2">口コミ投稿フォーム</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="" method="post" id="post_form">
+<div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+    tabindex="-1" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalToggleLabel2">口コミ投稿フォーム</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post" id="post_form">
+                    <div id="send_app">
                         {% csrf_token %}
                         {{ form.non_field_errors }}
                         <div class="mb-3">
@@ -221,23 +224,23 @@
                                 <p class="text-secondary">残り [[ 100 - inputEvaluation.length ]] 文字</p>
                             </div>
                         </div>
-                        <!-- 隠し要素 -->
-                        <div class="field d-none">
-                            <!-- 隠しユーザー情報 -->
-                            {{form.sender_name|add_class:"form-control"|attr:"id:sender_name"}}
-                            {{form.sender_college|add_class:"form-select"|attr:"id:sender_college"}}
-                            <input type="hidden" id="sender_name_dummy" value="{{user.username}}">
-                            <input type="hidden" id="sender_college_dummy" value="{{user.college}}">
-                            <!-- 隠し送信ボタン -->
-                            <button type="submit" id="hidden-submit-button">送信</button>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" data-bs-target="#exampleModalToggle1" data-bs-toggle="modal"
-                        data-bs-dismiss="modal">戻る</button>
-                    <button class="btn btn-primary" v-on:click="form_submit" id="modal-send-button">投稿する</button>
-                </div>
+                    </div>
+                    <!-- 隠し要素 -->
+                    <div class="field d-none">
+                        <!-- 隠しユーザー情報 -->
+                        {{form.sender_name|add_class:"form-control"|attr:"id:sender_name"}}
+                        {{form.sender_college|add_class:"form-select"|attr:"id:sender_college"}}
+                        <input type="hidden" id="sender_name_dummy" value="{{user.username}}">
+                        <input type="hidden" id="sender_college_dummy" value="{{user.college}}">
+                        <!-- 隠し送信ボタン -->
+                        <button type="submit" id="hidden-submit-button">送信</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-target="#exampleModalToggle1" data-bs-toggle="modal"
+                    data-bs-dismiss="modal">戻る</button>
+                <button class="btn btn-primary" onclick="form_submit()" id="modal-send-button">投稿する</button>
             </div>
         </div>
     </div>

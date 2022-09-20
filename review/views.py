@@ -27,8 +27,7 @@ class LectureView(FormMixin, DetailView):
         context['subject_data'] = subject_data
         context['review_datas'] = Review.objects.filter(lecture=self.kwargs['pk']).order_by('created_at')
         # レビューの件数を取得
-        context['review_count'] = subject_data.star1 + subject_data.star2 + subject_data.star3 + subject_data.star4 + subject_data.star5
-        context['form'] = ReviewForm()
+        # context['review_count'] = subject_data.star1 + subject_data.star2 + subject_data.star3 + subject_data.star4 + subject_data.star5
         return context
 
     def get_success_url(self):
