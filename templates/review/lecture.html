@@ -252,7 +252,7 @@
                 <p>ログインしてから投稿してください。</p>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" onclick="location.href='{% url 'login' %}'">ログイン</button>
+                <button class="btn btn-primary" onclick="location.href='{% url 'login' %}?next={{ request.path }}'">ログイン</button>
             </div>
         </div>
     </div>

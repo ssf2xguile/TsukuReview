@@ -40,7 +40,7 @@
                     </li>
                     {% else %}
                     <li class="nav-item me-2">
-                      <button type="button" class="btn btn-outline-primary" onclick="location.href='{% url 'login' %}'">ログイン</button>
+                      <button type="button" class="btn btn-outline-primary" onclick="location.href='{% url 'login' %}?next={{ request.path }}'">ログイン</button>
                     </li>
                     <li class="nav-item me-2">
                       <button type="button" class="btn btn-outline-secondary" onclick="location.href='{% url 'signup' %}'">新規登録</button>
