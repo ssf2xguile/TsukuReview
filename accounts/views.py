@@ -23,7 +23,7 @@ class SignUpView(CreateView):
 
 class LoginView(LoginView):
     template_name = 'accounts/login.html'
-    authentication_form = UserLoginForm
+    form_class = UserLoginForm
 
 class LogoutView(LogoutView):
     template_name = 'accounts/logout.html'

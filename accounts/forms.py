@@ -3,7 +3,7 @@ from django import forms
 from .models import CustomUser
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm, AuthenticationForm
 from allauth.account.forms import SignupForm
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, authenticate
 import re
 
 User = get_user_model()
@@ -68,16 +68,18 @@ class UserLoginForm(AuthenticationForm):
         fields = ['username', 'password']
     
     def clean(self):
-        username = self.cleaned_data['username']
-        password = self.cleaned_data['password']
+        cleaned_data = super().clean()
+        username = cleaned_data['username']
+        password = cleaned_data['password']
         print(username)
         try:
-            user = User.objects.get(username=username)
+            user = User.objects.get(email=username)
         except User.DoesNotExist:
             print("if1")
             raise forms.ValidationError('メールアドレスまたはパスワードが間違っています')
-        if user.password != password:
+        if not authenticate(email=username, password=password):
             raise forms.ValidationError('メールアドレスまたはパスワードが間違っています')
+        return cleaned_data
 
 class MyPasswordChangeForm(PasswordChangeForm):
     """パスワード変更フォーム"""
@@ -86,3 +88,16 @@ class MyPasswordChangeForm(PasswordChangeForm):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs['class'] = 'form-control'
+
+    def clean_old_password(self):
+        old_password = self.cleaned_data['old_password']
+        if not self.user.check_password(old_password):
+            raise forms.ValidationError('現在のパスワードが間違っています')
+        return old_password
+    
+    def clean_new_password2(self):
+        new_password1 = self.cleaned_data['new_password1']
+        new_password2 = self.cleaned_data['new_password2']
+        if new_password1 and new_password2 and new_password1 != new_password2:
+            raise forms.ValidationError("パスワードが一致しません")
+        return new_password2
