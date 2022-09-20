@@ -225,14 +225,8 @@
                             </div>
                         </div>
                     </div>
-                    <!-- 隠し要素 -->
+                    <!-- 隠し要素 送信ボタン-->
                     <div class="field d-none">
-                        <!-- 隠しユーザー情報 -->
-                        {{form.sender_name|add_class:"form-control"|attr:"id:sender_name"}}
-                        {{form.sender_college|add_class:"form-select"|attr:"id:sender_college"}}
-                        <input type="hidden" id="sender_name_dummy" value="{{user.username}}">
-                        <input type="hidden" id="sender_college_dummy" value="{{user.college}}">
-                        <!-- 隠し送信ボタン -->
                         <button type="submit" id="hidden-submit-button">送信</button>
                     </div>
                 </form>

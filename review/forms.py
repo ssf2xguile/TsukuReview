@@ -4,7 +4,7 @@ from .models import Review
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
-        fields = ['title', 'sender_name', 'sender_college','year', 'rating', 'grade', 'overall', 'difficulty', 'kadai', 'evaluation']
+        fields = ['title', 'year', 'rating', 'grade', 'overall', 'difficulty', 'kadai', 'evaluation']
     
     # バリデーションエラーがある場合は、エラーを表示する
     def clean_title(self):

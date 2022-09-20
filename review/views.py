@@ -25,7 +25,7 @@ class LectureView(FormMixin, DetailView):
         # self.kwargs['pk']でurl中の変数pkを取得できる
         subject_data = Subject.objects.get(pk=self.kwargs['pk'])
         context['subject_data'] = subject_data
-        context['review_datas'] = Review.objects.filter(lecture=self.kwargs['pk']).order_by('created_at')
+        context['review_datas'] = Review.objects.filter(lecture=self.kwargs['pk']).order_by('-created_at')
         # レビューの件数を取得
         # context['review_count'] = subject_data.star1 + subject_data.star2 + subject_data.star3 + subject_data.star4 + subject_data.star5
         return context
@@ -50,6 +50,8 @@ class LectureView(FormMixin, DetailView):
         subject_data = Subject.objects.get(pk=self.kwargs['pk'])
         data = form.cleaned_data
         data['lecture'] = Subject.objects.get(pk=self.kwargs['pk'])
+        data['sender_name'] = self.request.user.username
+        data['sender_college'] = self.request.user.college
         obj = Review(**data)
         obj.save()
         if data['rating'] == 1:
