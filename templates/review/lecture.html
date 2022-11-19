@@ -4,11 +4,13 @@
 
 {% block content %}
 <div class="container">
-    {% if post_success %}
-    <div class="alert alert-primary alert-dismissible my-3" role="alert">
-        ご投稿ありがとうございます。今後あなたの投稿が役に立つことでしょう。
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    {% if messages %}
+    {% for message in messages %}
+	<div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
+    {% endfor %}
     {% endif %}
     <input type="hidden" id="lecture_code" value="{{subject_data.code}}">
     <div id="lecture_app">

@@ -64,8 +64,9 @@ class LectureView(FormMixin, DetailView):
             Subject.objects.filter(pk=self.kwargs['pk']).update(star4=subject_data.star4+1)
         elif data['rating'] == 5:
             Subject.objects.filter(pk=self.kwargs['pk']).update(star5=subject_data.star5+1)
+        messages.success(self.request, 'この度はレビューしていただきありがとうございます。')
         return super().form_valid(form)
 
     def form_invalid(self, form):
-        messages.error(self.request, '入力内容をご確認ください。')
+        messages.error(self.request, 'フォームの内容が不適切です。もう一度内容をご確認ください。')
         return super().form_invalid(form)
