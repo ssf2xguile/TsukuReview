@@ -25,7 +25,7 @@ class LoginView(LoginView):
     template_name = 'accounts/login.html'
     form_class = UserLoginForm
 
-class LogoutView(LogoutView):
+class LogoutView(LoginRequiredMixin, LogoutView):
     template_name = 'accounts/logout.html'
 
 class ProfileView(LoginRequiredMixin, TemplateView):

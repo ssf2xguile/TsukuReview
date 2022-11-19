@@ -10,10 +10,29 @@ from .forms import ReviewForm
 class IndexView(TemplateView):
     template_name = 'review/index.html'
 
+class TermsView(TemplateView):
+    template_name = 'review/terms.html'
+
+class PrivacyView(TemplateView):
+    template_name = 'review/privacy.html'
+
 class SearchView(ListView):
-    model = Subject
+    model = Review
     template_name = 'review/search.html'
-    paginate_by = 10
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['review_list'] = self.model.objects.all().order_by('-created_at')[:5]
+        return context
+
+class NewReviewsView(ListView):
+    model = Review
+    template_name = 'review/newreviews.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['review_list'] = self.model.objects.all().order_by('-created_at')[:30]
+        return context
 
 class LectureView(FormMixin, DetailView):
     model = Subject

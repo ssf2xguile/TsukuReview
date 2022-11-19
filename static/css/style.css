@@ -217,6 +217,14 @@ body {
     background-color: #ffffe6;
 }
 
+.review-title {
+    overflow-wrap: anywhere;
+}
+
+.fromNow {
+    font-size: 0.5em;
+}
+
 /* フッターの設定 */
 footer {
     margin-top: auto;

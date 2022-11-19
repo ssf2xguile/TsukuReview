@@ -15,7 +15,8 @@
                                 d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                         </svg>
                     </span>
-                    <input v-on:input="inputEvent" type="text" class="form-control" placeholder="科目番号は前方一致、科目名・教員名は正規表現に対応">
+                    <input v-on:input="inputEvent" type="text" class="form-control"
+                        placeholder="科目番号は前方一致、科目名・教員名は正規表現に対応">
                 </div>
                 <div v-if="!query" class="text-center my-3">
                     自分に合った授業を履修して
@@ -36,16 +37,19 @@
                                 <!--空のdivクラスを用意し、d-flexを適用する(子要素を上下左右中央揃え)-->
                                 <div class="d-flex align-items-center justify-content-center w-100 h-100 py-3">
                                     <!--学類ごとのカラーや配置を設定-->
-                                    <div :class="getSchoolsClass(sub.schools)"> 
+                                    <div :class="getSchoolsClass(sub.schools)">
                                         <h2>[[SimplifySchoolsName(sub.schools)]]</h2>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-10">
                                 <div class="card-body">
-                                    <a class="card-title fs-3 text-dark" :href="/lecture/ + [[sub.code]] + '/'">[[sub.name]]</a>
+                                    <a class="card-title fs-3 text-dark"
+                                        :href="/lecture/ + [[sub.code]] + '/'">[[sub.name]]</a>
                                     <h4 class="fw-normal">[[sub.code]]</h4>
-                                    <p class="d-inline text-secondary">単位: [[sub.unit]], 履修年次: [[sub.grade]]年, 学期: [[ValidateData(sub.semester)]], 担当教員: [[ValidateData(readmoreFilter(sub.teachers, 20, "..."))]]</p>
+                                    <p class="d-inline text-secondary">単位: [[sub.unit]], 履修年次: [[sub.grade]]年, 学期:
+                                        [[ValidateData(sub.semester)]], 担当教員:
+                                        [[ValidateData(readmoreFilter(sub.teachers, 20, "..."))]]</p>
                                     <div class="kuchikomi mb-2">
                                         <img src="{% static 'images/コメントアイコン7.png' %}" alt="コメントアイコン"
                                             class="comment-img me-2">
@@ -54,14 +58,204 @@
                                                 :data-rate="[[DataRatingCalculation1(sub.star1, sub.star2, sub.star3, sub.star4, sub.star5)]]"></span>
                                         </p>
                                         <!-- レビューの計算を行う -->
-                                        <p class="d-inline fs-4 fw-bold text-primary me-2"><u id="calculate_result">[[DataRatingCalculation2(sub.star1, sub.star2, sub.star3, sub.star4, sub.star5)]]</u>
+                                        <p class="d-inline fs-4 fw-bold text-primary me-2"><u
+                                                id="calculate_result">[[DataRatingCalculation2(sub.star1, sub.star2,
+                                                sub.star3, sub.star4, sub.star5)]]</u>
                                         </p>
-                                        <p class="d-inline">([[RatingCount(sub.star1, sub.star2, sub.star3, sub.star4, sub.star5)]]件)</p>
+                                        <p class="d-inline">([[RatingCount(sub.star1, sub.star2, sub.star3, sub.star4,
+                                            sub.star5)]]件)</p>
                                     </div>
                                     <p class="d-inline text-secondary">[[ValidateData(sub.colleges)]]</p>
 
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 情報カード（検索ボックスが空のときのみ表示） -->
+        <div v-show="!query">
+            <div class="row">
+                <div class="card-group">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <h5 class="card-title">
+                                    新しい質問🤗
+                                </h5>
+                                <span class="text-end">
+                                    <a href="{% url 'new_reviews' %}" class="btn btn-outline-secondary btn-sm">もっと見る</a>
+                                </span>
+                            </div>
+                            <ol class="list-group list-group-flush">
+                                {% for review in review_list %}
+                                <li class="list-group-item review-title">
+                                        {{review.title | truncatechars:30}}
+                                    <br>
+                                    <div class="newpost-thread text-end">
+                                        <a href="{% url 'lecture' review.lecture.code %}">
+                                            {{ review.lecture.name | truncatechars:30}}
+                                        </a>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">つくレビュードキュメント✎</h5>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><a href="{% url 'terms' %}">
+                                        📝利用規約
+                                    </a>
+                                </li>
+                                <li class="list-group-item"><a href="{% url 'privacy' %}">
+                                        🔏プライバシーポリシー
+                                    </a>
+                                </li>
+                                <li class="list-group-item"><a
+                                        href="https://github.com/half-blue/A_plus_Tsukuba/wiki/%E3%82%B9%E3%83%9D%E3%83%B3%E3%82%B5%E3%83%BC%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6"
+                                        target="_blank">
+                                        🤝スポンサー（広告掲載）について
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z" />
+                                            <path fill-rule="evenodd"
+                                                d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z" />
+                                        </svg>
+                                    </a>
+                                </li>
+                            </ul>
+                            <br>
+                            <h5 class="card-title">開発チーム⚒️</h5>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <a href="https://github.com/half-blue/A_plus_Tsukuba/wiki/%E9%96%8B%E7%99%BA%E3%83%A1%E3%83%B3%E3%83%90%E3%83%BC%E7%B4%B9%E4%BB%8B"
+                                        target="_blank">
+                                        👤開発メンバー
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z" />
+                                            <path fill-rule="evenodd"
+                                                d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z" />
+                                        </svg>
+                                    </a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://github.com/ssf2xguile/TsukuReview" target="_blank">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+                                            <path
+                                                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
+                                        </svg>
+                                        つくレビューGitHub
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z" />
+                                            <path fill-rule="evenodd"
+                                                d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z" />
+                                        </svg>
+                                    </a>
+                                </li>
+                                <li class="list-group-item">
+                                    📨<a href="mailto:info@aplus-tsukuba.net">メールでのお問い合わせ</a>
+                                </li>
+                                <li class="list-group-item">
+                                    📋<a href="/threads/6291">運営へのお問い合わせスレッド</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">便利リンク集🔗</h5>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><a href="https://manaba.tsukuba.ac.jp/ct/home"
+                                        target="_blank">
+                                        🌱manaba
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z" />
+                                            <path fill-rule="evenodd"
+                                                d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z" />
+                                        </svg>
+                                    </a>
+                                </li>
+                                <li class="list-group-item"><a
+                                        href="https://twins.tsukuba.ac.jp/campusweb/campusportal.do" target="_blank">
+                                        🎓TWINS
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z" />
+                                            <path fill-rule="evenodd"
+                                                d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z" />
+                                        </svg>
+                                    </a>
+                                </li>
+                                <li class="list-group-item"><a
+                                        href="https://make-it-tsukuba.github.io/alternative-tsukuba-kdb/"
+                                        target="_blank">
+                                        📒KdBもどき
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z" />
+                                            <path fill-rule="evenodd"
+                                                d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z" />
+                                        </svg>
+                                    </a>
+                                </li>
+                            </ul>
+                            <br>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><a href="https://www.tulips.tsukuba.ac.jp/opac/user/top"
+                                        target="_blank">
+                                        📚Tulips マイライブラリ
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z" />
+                                            <path fill-rule="evenodd"
+                                                d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z" />
+                                        </svg>
+                                    </a>
+                                </li>
+                                <li class="list-group-item"><a
+                                        href="https://papercut-p01.u.tsukuba.ac.jp:9192/app?service=page/UserSummary"
+                                        target="_blank">
+                                        🖨️Webプリント（全学計算機）
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z" />
+                                            <path fill-rule="evenodd"
+                                                d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z" />
+                                        </svg>
+                                    </a>
+                                </li>
+                                <li class="list-group-item"><a href="https://view-con00.u.tsukuba.ac.jp/"
+                                        target="_blank">
+                                        💻リモートアクセス（全学計算機）
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z" />
+                                            <path fill-rule="evenodd"
+                                                d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z" />
+                                        </svg>
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>

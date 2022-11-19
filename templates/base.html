@@ -29,21 +29,21 @@
                       <a class="nav-link" aria-current="page" href="{% url 'search' %}">授業検索</a>
                     </li>
                     <li class="nav-item me-2">
-                      <a class="nav-link" aria-current="page" href="#">つくレビューとは？</a>
+                      <a class="nav-link" aria-current="page" href="{% url 'index' %}">つくレビューとは？</a>
                     </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item me-2">
                       <button type="button" class="btn btn-outline-primary" onclick="location.href='{% url 'profile' %}'">プロフィール</button>
                     </li>
                     <li class="nav-item me-2">
-                      <button type="button" class="btn btn-outline-secondary" onclick="location.href='{% url 'logout' %}'">ログアウト</button>
+                      <button type="button" class="btn btn-outline-danger" onclick="location.href='{% url 'logout' %}'">ログアウト</button>
                     </li>
                     {% else %}
                     <li class="nav-item me-2">
                       <button type="button" class="btn btn-outline-primary" onclick="location.href='{% url 'login' %}?next={{ request.path }}'">ログイン</button>
                     </li>
                     <li class="nav-item me-2">
-                      <button type="button" class="btn btn-outline-secondary" onclick="location.href='{% url 'signup' %}'">新規登録</button>
+                      <button type="button" class="btn btn-outline-success" onclick="location.href='{% url 'signup' %}'">新規登録</button>
                     </li>
                     {% endif %}
                 </ul>
@@ -60,7 +60,7 @@
     <footer class="text-white text-center text-lg-start">
       <!-- Copyright -->
       <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-        Copyright&copy; 2022 つくレビュー
+        copyright&copy; 2022 半分、青い。 All Rights Reserved.
       </div>
       <!-- Copyright -->
     </footer>
