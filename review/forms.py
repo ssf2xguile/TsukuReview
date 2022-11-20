@@ -36,3 +36,19 @@ class ReviewForm(forms.ModelForm):
         if len(evaluation) < 5:
             raise forms.ValidationError('課題の評価についての言及が短すぎます')
         return evaluation
+
+class ContactForm(forms.Form):
+    name = forms.CharField(label='お名前', max_length=30)
+    email = forms.EmailField(label='メールアドレス', max_length=30)
+    message = forms.CharField(label='お問い合わせ内容', widget=forms.Textarea)
+
+    def __init__(self, *args, **kwargs):
+        for field in self.base_fields.values():
+            field.widget.attrs["class"] = "form-control"
+        super().__init__(*args, **kwargs)
+
+    def clean_message(self):
+        message = self.cleaned_data['message']
+        if len(message) < 10:
+            raise forms.ValidationError('お問い合わせ内容が短すぎます')
+        return message

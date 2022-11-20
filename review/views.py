@@ -1,10 +1,10 @@
 from django.contrib import messages
 from django.shortcuts import render
 from django.views.generic.edit import FormMixin
-from django.views.generic import TemplateView, CreateView, ListView, DetailView
-from django.urls import reverse
+from django.views.generic import TemplateView, CreateView, ListView, DetailView, FormView
+from django.urls import reverse, reverse_lazy
 from .models import Subject, Review
-from .forms import ReviewForm
+from .forms import ReviewForm, ContactForm
 
 
 class IndexView(TemplateView):
@@ -15,6 +15,30 @@ class TermsView(TemplateView):
 
 class PrivacyView(TemplateView):
     template_name = 'review/privacy.html'
+
+class ContactsView(FormView):
+    template_name = 'review/contacts.html'
+    form_class = ContactForm
+
+    def form_valid(self, form):
+        return render(self.request, 'review/contacts.html', {'form': form})
+
+class ContactsConfirmView(FormView):
+    form_class = ContactForm
+
+    def form_valid(self, form):
+        return render(self.request, 'review/contacts_confirm.html', {'form': form})
+
+    def form_invalid(self, form):
+        return render(self.request, 'review/contacts.html', {'form': form})
+
+class ContactsCompleteView(CreateView):
+    form_class = ContactForm
+    success_url = reverse_lazy('contacts_complete')
+
+    def form_invalid(self, form):
+        """基本的にはここに飛んでこないはずです。UserDataConfrimでバリデーションは済んでるため"""
+        return render(self.request, 'review/contacts_complete.html', {'form': form})
 
 class SearchView(ListView):
     model = Review
@@ -27,7 +51,7 @@ class SearchView(ListView):
 
 class NewReviewsView(ListView):
     model = Review
-    template_name = 'review/newreviews.html'
+    template_name = 'review/new_reviews.html'
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

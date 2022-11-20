@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <h1>新しいレビュー</h1>
+    <p class="lead">新しいレビューを{{ review_list | length }}件表示しています。</p>
+    <div id="new_reviews_app">
+        <div class="row g-1 card-group">
+            {% for review in review_list %}
+            <div class="col-md-3">
+                <div class="card my-1">
+                    <div class="card-body">
+                        <div class="d-flex flex-column justify-content-between">
+                            <p class="card-text review-title">
+                                {{review.title | truncatechars:30}}
+                            </p>
+                            <div class="text-end fromNow">
+                                <a href="{% url 'lecture' review.lecture.code %}" class="card-link">
+                                    {{ review.lecture.name | truncatechars:30}}
+                                </a>
+                                <br>
+                                [[ fromNowFilter('{{review.created_at | date:"r"}}') ]]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/min/moment.min.js" integrity="sha256-80OqMZoXo/w3LuatWvSCub9qKYyyJlK0qnUCYEghBx8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/locale/ja.js" integrity="sha256-lyDeRZLdlIYfL6u1ERBTP+RGIPUX5QRI3YKKfy7vcAk=" crossorigin="anonymous"></script>
+<script src="{% static 'js/newreviews.js' %}"></script>
+{% endblock %}

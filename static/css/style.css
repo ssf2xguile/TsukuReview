@@ -244,6 +244,7 @@ footer {
     border-color: #E8E8E8;
 }
 
+/* テーブルの設定(コピペ) */
 table{
     width: 100%;
     border-collapse: collapse;
@@ -278,6 +279,17 @@ table td{
 .error-message{
     color: red;
     font-size: 0.8rem;
+}
+
+.req{
+    font-size:11px;
+    font-weight: normal;
+    background-color: #fe5855;
+}
+
+.btn-agree {
+    background-color: #fe5855;
+    color: white;
 }
 
 @media (max-width:768px) {

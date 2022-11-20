@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <h1>お問い合わせ内容確認</h1>
+    <div class="row">
+        <div class="col">
+            <div class="card col-md-10 mx-auto my-3">
+                <div class="card-body">
+                    {% for field in form %}
+                    <div class="form-group">
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label for="{{ field.id_for_label }}" class="col-form-label">{{ field.label_tag }}</label>
+                            </div>
+                            <div class="col-md-7">
+                                <p>{{ field.value }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <form action="{% url 'contacts' %}" method="POST">
+                        <div class="mx-auto d-inline-block mb-2"><button type="submit" class="btn btn-secondary">戻る</button></div>
+                        {% for field in form %}{{ field.as_hidden }}{% endfor %}
+                        {% csrf_token %}
+                    </form>
+                    
+                    <form action="{% url 'contacts_complete' %}" method="POST">
+                        <div class="mx-auto d-inline-block mb-2"><button type="submit" class="btn btn-agree">送信する</button></div>
+                        {% for field in form %}{{ field.as_hidden }}{% endfor %}
+                        {% csrf_token %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
