@@ -170,3 +170,8 @@ MESSAGE_TAGS = {
     messages.DEBUG: 'dark',
     messages.ERROR: 'danger',
 }
+
+SUPERUSER_NAME = 'TsukureviewAdmin'
+SUPERUSER_EMAIL = 'hoge@piyo.com'
+SUPERUSER_PASSWORD = 'tsukureview'
+SUPERUSER_COLLEGE = 18
