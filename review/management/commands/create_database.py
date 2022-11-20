@@ -3,6 +3,8 @@ from django.conf import settings
 import json
 import uuid
 import sqlite3
+from django.utils import timezone
+
 
 
 class Command(BaseCommand):
@@ -32,7 +34,7 @@ class Command(BaseCommand):
             rating = 5
             grade = 5
             review = [sub[0], review_id, msg_sender_name, 1, msg_title, year,
-                    rating, grade, msg_overall, msg_difficulty, msg_kadai, msg_evaluation]
+                    rating, grade, msg_overall, msg_difficulty, msg_kadai, msg_evaluation, timezone.now()]
             col = [sub[0], sub[1], sub[3], sub[4], sub[5], sub[8],
                 sub[9], sub[13], sub[14], sub[15], 0, 0, 0, 0, 1]
             cur.execute("insert into review_subject("
@@ -40,7 +42,7 @@ class Command(BaseCommand):
                         + ") values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);", col)
             cur.execute("insert into review_review("
                         + "lecture_id,review_id,sender_name,sender_college,title,year,rating,grade,overall,difficulty,kadai,evaluation,created_at"
-                        + ") values (?,?,?,?,?,?,?,?,?,?,?,?,datetime('now', 'localtime'));", review)
+                        + ") values (?,?,?,?,?,?,?,?,?,?,?,?,?);", review)
 
         print("スレッド生成が完了しました。")
         conn.commit()
