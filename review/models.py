@@ -15,7 +15,7 @@ class Subject(models.Model):
     teachers =  models.TextField(verbose_name='教員名', blank=True, max_length=100, default="")
     overview = models.TextField(verbose_name='概要', blank=True, max_length=200, default="")
     subtype =  models.TextField(verbose_name='種類', blank=True, max_length=32, default="")
-    schools = models.CharField(verbose_name="学群等", blank=True,max_length=20, default="")
+    schools = models.CharField(verbose_name="学群等", blank=True,max_length=40, default="")
     colleges = models.CharField(verbose_name="学類等", blank=True, max_length=40, default="")
     star1 = models.IntegerField(verbose_name="星1",blank=False,default=0)
     star2 = models.IntegerField(verbose_name="星2",blank=False,default=0)
