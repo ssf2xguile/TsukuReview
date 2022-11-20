@@ -32,21 +32,15 @@ init.bat
 ```
 python manage.py makemigrations
 python manage.py migrate
-python init/add_kdb.py
+python manage.py create_database
+python manage.py create_superuser
 ```
 
-3. スーパーユーザー作成  
-以下の情報を画面に従って入力します。
-```
-email : hoge@piyo.com
-password : tsukureview
-```
-
-4. スーパーユーザーの名前を設定  
+3. サーバーの起動  
 ```
 python manage.py runserver
 ```
-で起動し、`admin/`にアクセスしログインします。作成したユーザー名に`tsukureview`を設定したら初期設定は完了です。
+でアプリを起動する。
 
 
 
