@@ -1,15 +1,16 @@
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, CreateView, View, FormView
-from django.views.generic.edit import UpdateView
+from django.views.generic import TemplateView, CreateView, View, FormView, ListView
+from django.views.generic.edit import UpdateView, DeleteView
 from django.shortcuts import render, redirect
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import (
      get_user_model, logout as auth_logout,
 )
-
-from accounts.models import CustomUser
-from .forms import UserCreateForm, ProfileUpdateForm, MyPasswordChangeForm, UserLoginForm
+from django.utils import timezone
+from accounts.models import CustomUser, Notice
+from .mixins import OnlyStaffMixin
+from .forms import UserCreateForm, ProfileUpdateForm, MyPasswordChangeForm, UserLoginForm, NoticeForm
 
 User = get_user_model() # 自作したUserモデルを使用するための宣言
 
@@ -72,3 +73,34 @@ class UserDeleteView(LoginRequiredMixin, View):
         CustomUser.objects.filter(email=self.request.user.email).delete()
         auth_logout(self.request)
         return render(self.request,'accounts/delete_complete.html')
+
+class NoticesView(LoginRequiredMixin, OnlyStaffMixin, ListView):
+    template_name = 'accounts/notices.html'
+    model = Notice
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['notices'] = Notice.objects.all().order_by('-created_at')
+        return context
+
+class NoticeCreateView(LoginRequiredMixin, OnlyStaffMixin, CreateView):
+    template_name = 'accounts/notice_create.html'
+    form_class = NoticeForm
+    success_url = reverse_lazy('staff_notices')
+
+class NoticeUpdateView(LoginRequiredMixin, OnlyStaffMixin, UpdateView):
+    template_name = 'accounts/notice_update.html'
+    model = Notice
+    fields = ('title', 'content')
+    success_url = reverse_lazy('staff_notices')
+
+    def form_valid(self, form):
+        notice = form.save(commit=False)
+        notice.updated_at = timezone.now()
+        notice.save()
+        return redirect('staff_notices')
+
+class NoticeDeleteView(LoginRequiredMixin, OnlyStaffMixin, DeleteView):
+    template_name = 'accounts/notice_delete.html'
+    model = Notice
+    success_url = reverse_lazy('staff_notices')

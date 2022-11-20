@@ -245,20 +245,20 @@ footer {
 }
 
 /* テーブルの設定(コピペ) */
-table{
+.table-original{
     width: 100%;
     border-collapse: collapse;
 }
   
-table tr{
+.table-original tr{
     border-bottom: solid 2px white;
 }
   
-table tr:last-child{
+.table-original tr:last-child{
     border-bottom: none;
 }
   
-table th{
+.table-original th{
     text-align: left;
     width: 30%;
     background-color: #52c2d0;
@@ -268,7 +268,7 @@ table th{
 }
 
   
-table td{
+.table-original td{
     text-align: left;
     width: 70%;
     text-align: center;

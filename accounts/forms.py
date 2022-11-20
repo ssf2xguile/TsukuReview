@@ -1,6 +1,6 @@
 import email
 from django import forms
-from .models import CustomUser
+from .models import CustomUser, Notice
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm, AuthenticationForm
 from allauth.account.forms import SignupForm
 from django.contrib.auth import get_user_model, authenticate
@@ -101,3 +101,25 @@ class MyPasswordChangeForm(PasswordChangeForm):
         if new_password1 and new_password2 and new_password1 != new_password2:
             raise forms.ValidationError("パスワードが一致しません")
         return new_password2
+
+class NoticeForm(forms.ModelForm):
+    class Meta:
+        model = Notice
+        fields = ['title', 'content']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'
+
+    def clean_title(self):
+        title = self.cleaned_data['title']
+        if len(title) <= 1:
+            raise forms.ValidationError('タイトルが短すぎます')
+        return title
+
+    def clean_content(self):
+        content = self.cleaned_data['content']
+        if len(content) <= 1:
+            raise forms.ValidationError('内容が短すぎます')
+        return content

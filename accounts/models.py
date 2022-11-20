@@ -95,3 +95,12 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def clean(self):
         super().clean()
         self.email = self.__class__.objects.normalize_email(self.email)
+
+class Notice(models.Model):
+    title = models.CharField('タイトル', max_length=100)
+    content = models.TextField('内容', max_length=400)
+    created_at = models.DateTimeField('作成日', default=timezone.now)
+    updated_at = models.DateTimeField('更新日', default=timezone.now)
+    
+    def __str__(self):
+        return self.title

@@ -11,4 +11,8 @@ urlpatterns = [
     path('logout/', views.LogoutView.as_view(), name='logout'),
     path('delete_confirm', views.DeleteConfirmView.as_view(), name='delete_confirm'),
     path('delete_complete', views.UserDeleteView.as_view(), name='delete_complete'),
+    path('notices/', views.NoticesView.as_view(), name='staff_notices'),
+    path('notice/create/', views.NoticeCreateView.as_view(), name='staff_notice_create'),
+    path('notice/update/<int:pk>/', views.NoticeUpdateView.as_view(), name='staff_notice_update'),
+    path('notice/delete/<int:pk>/', views.NoticeDeleteView.as_view(), name='staff_notice_delete'),
 ]
