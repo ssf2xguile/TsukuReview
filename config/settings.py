@@ -171,6 +171,14 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_EMAIL_REQUIRED = True   # ユーザ登録にメルアド必須にする
 
+# 本番環境でのメール送信設定
+# EMAIL_BACKEND = env('EMAIL_BACKEND')
+# EMAIL_HOST = env('EMAIL_HOST')
+# EMAIL_PORT = env('EMAIL_PORT')
+# EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+# EMAIL_USE_SSL = env.bool('EMAIL_USE_SSL')
+
 # ローカルでの開発のためメールをコンソールに出力する
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 

@@ -96,6 +96,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         super().clean()
         self.email = self.__class__.objects.normalize_email(self.email)
 
+    def email_user(self, subject, message, from_email=None, **kwargs):
+        """Send an email to this user."""
+        send_mail(subject, message, from_email, [self.email], **kwargs)
+
 class Notice(models.Model):
     title = models.CharField('タイトル', max_length=100)
     content = models.TextField('内容', max_length=400)

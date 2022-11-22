@@ -1,13 +1,18 @@
+from django.conf import settings
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, CreateView, View, FormView, ListView
 from django.views.generic.edit import UpdateView, DeleteView
 from django.shortcuts import render, redirect
+from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import (
      get_user_model, logout as auth_logout,
 )
 from django.utils import timezone
+from django.http import Http404, HttpResponseBadRequest
+from django.template.loader import render_to_string
+from django.core.signing import BadSignature, SignatureExpired, loads, dumps
 from accounts.models import CustomUser, Notice
 from .mixins import OnlyStaffMixin
 from .forms import UserCreateForm, ProfileUpdateForm, MyPasswordChangeForm, UserLoginForm, NoticeForm
@@ -19,8 +24,68 @@ class SignUpView(CreateView):
     template_name = 'accounts/signup.html'
 
     def form_valid(self, form):
-        user = form.save() # formの情報を保存
-        return redirect('login')
+        # 仮登録と本登録の切り替えは、is_active属性を使うと簡単です。
+        # 退会処理も、is_activeをFalseにするだけにしておくと捗ります。
+        user = form.save(commit=False)
+        user.is_active = False
+        user.save()
+
+        # アクティベーションURLの送付
+        current_site = get_current_site(self.request)
+        domain = current_site.domain
+        local_host = '127.0.0.1:8000'
+        context = {
+            'protocol': self.request.scheme,
+            'domain': local_host,
+            'token': dumps(user.pk),
+            'user': user,
+        }
+
+        subject = render_to_string('accounts/mail_template/create/subject.txt', context)
+        message = render_to_string('accounts/mail_template/create/message.txt', context)
+
+        user.email_user(subject, message)
+        return redirect('signup_done')
+
+        # サインアップしてすぐにログインするための処理
+        # user = form.save()
+        # return redirect('login')
+    
+class SignUpDoneView(TemplateView):
+    template_name = 'accounts/signup_done.html'
+
+class SignUpCompleteView(TemplateView):
+    template_name = 'accounts/signup_complete.html'
+    timeout_seconds = getattr(settings, 'ACTIVATION_TIMEOUT_SECONDS', 60 * 60 * 24)
+
+    def get(self, request, *args, **kwargs):
+        """tokenが正しければ本登録."""
+        token = kwargs.get('token')
+        try:
+            user_pk = loads(token, max_age=self.timeout_seconds)
+
+        # 期限切れ
+        except SignatureExpired:
+            return HttpResponseBadRequest()
+
+        # tokenが間違っている
+        except BadSignature:
+            return HttpResponseBadRequest()
+
+        # tokenは問題なし
+        else:
+            try:
+                user = User.objects.get(pk=user_pk)
+            except User.DoesNotExist:
+                return HttpResponseBadRequest()
+            else:
+                if not user.is_active:
+                    # 問題なければ本登録とする
+                    user.is_active = True
+                    user.save()
+                    return super().get(request, **kwargs)
+
+        return HttpResponseBadRequest()
 
 class LoginView(LoginView):
     template_name = 'accounts/login.html'

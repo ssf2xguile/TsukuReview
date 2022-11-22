@@ -49,8 +49,11 @@ class UserCreateForm(UserCreationForm):
     def clean_email(self):
         email = self.cleaned_data['email']
         email_pattern = r"s1[8-9]|s2[0-2]\d{5}@[su].tsukuba.ac.jp"
-        if User.objects.filter(email=email).exists():
+        if User.objects.filter(email=email, is_active=True).exists():
             raise forms.ValidationError('このメールアドレスは既に登録されています')
+        if User.objects.filter(email=email, is_active=False).exists():
+            User.objects.filter(email=email, is_active=False).delete()
+            return email
         if re.match(email_pattern, email) is None:
             raise forms.ValidationError('sから始まる大学のメールアドレスを入力してください')
         return email
@@ -61,6 +64,7 @@ class UserCreateForm(UserCreationForm):
         if password1 and password2 and password1 != password2:
             raise forms.ValidationError("パスワードが一致しません")
         return password2
+    
 
 class UserLoginForm(AuthenticationForm):
     class Meta:
