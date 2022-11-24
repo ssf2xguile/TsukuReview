@@ -41,8 +41,8 @@ class UserCreateForm(UserCreationForm):
         username = self.cleaned_data['username']
         if len(username) <= 1:
             raise forms.ValidationError('名前が短すぎます')
-        if not username.encode('utf-8').isalnum():
-            raise forms.ValidationError('ユーザ名は英数字のみで入力してください')
+        # if not username.encode('utf-8').isalnum():
+        #     raise forms.ValidationError('ユーザ名は英数字のみで入力してください')
         return username
 
     def clean_email(self):
