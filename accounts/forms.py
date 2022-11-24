@@ -1,8 +1,7 @@
 import email
 from django import forms
 from .models import CustomUser, Notice
-from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm, AuthenticationForm
-from allauth.account.forms import SignupForm
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm, AuthenticationForm, PasswordResetForm, SetPasswordForm
 from django.contrib.auth import get_user_model, authenticate
 import re
 
@@ -55,7 +54,7 @@ class UserCreateForm(UserCreationForm):
             User.objects.filter(email=email, is_active=False).delete()
             return email
         if re.match(email_pattern, email) is None:
-            raise forms.ValidationError('sから始まる大学のメールアドレスを入力してください')
+            raise forms.ValidationError('sまたはuから始まる大学のメールアドレスを入力してください')
         return email
     
     def clean_password2(self):
@@ -86,7 +85,6 @@ class UserLoginForm(AuthenticationForm):
         return cleaned_data
 
 class MyPasswordChangeForm(PasswordChangeForm):
-    """パスワード変更フォーム"""
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -105,6 +103,22 @@ class MyPasswordChangeForm(PasswordChangeForm):
         if new_password1 and new_password2 and new_password1 != new_password2:
             raise forms.ValidationError("パスワードが一致しません")
         return new_password2
+
+class MyPasswordResetForm(PasswordResetForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'
+
+
+class MySetPasswordForm(SetPasswordForm):
+    """パスワード再設定用フォーム(パスワード忘れて再設定)"""
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'
 
 class NoticeForm(forms.ModelForm):
     class Meta:

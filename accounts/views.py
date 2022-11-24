@@ -4,7 +4,7 @@ from django.views.generic import TemplateView, CreateView, View, FormView, ListV
 from django.views.generic.edit import UpdateView, DeleteView
 from django.shortcuts import render, redirect
 from django.contrib.sites.shortcuts import get_current_site
-from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView
+from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import (
      get_user_model, logout as auth_logout,
@@ -15,7 +15,7 @@ from django.template.loader import render_to_string
 from django.core.signing import BadSignature, SignatureExpired, loads, dumps
 from accounts.models import CustomUser, Notice
 from .mixins import OnlyStaffMixin
-from .forms import UserCreateForm, ProfileUpdateForm, MyPasswordChangeForm, UserLoginForm, NoticeForm
+from .forms import UserCreateForm, ProfileUpdateForm, MyPasswordChangeForm, UserLoginForm, NoticeForm, MySetPasswordForm, MyPasswordResetForm
 
 User = get_user_model() # 自作したUserモデルを使用するための宣言
 
@@ -127,6 +127,31 @@ class PasswordChange(PasswordChangeView):
     form_class = MyPasswordChangeForm
     success_url = reverse_lazy('profile')
     template_name = 'accounts/password_change.html'
+
+class PasswordResetView(PasswordResetView):
+    subject_template_name = 'accounts/mail_template/password_reset/subject.txt'
+    email_template_name = 'accounts/mail_template/password_reset/message.txt'
+    template_name = 'accounts/password_reset.html'
+    form_class = MyPasswordResetForm
+    success_url = reverse_lazy('password_reset_done')
+
+
+class PasswordResetDoneView(PasswordResetDoneView):
+    """パスワード変更用URLを送りましたページ"""
+    template_name = 'accounts/password_reset_done.html'
+
+
+class PasswordResetConfirmView(PasswordResetConfirmView):
+    """新パスワード入力ページ"""
+    template_name = 'accounts/password_reset_confirm.html'
+    form_class = MySetPasswordForm
+    success_url = reverse_lazy('password_reset_complete')
+
+
+class PasswordResetCompleteView(PasswordResetCompleteView):
+    """新パスワード設定しましたページ"""
+    template_name = 'accounts/password_reset_complete.html'
+
 
 class DeleteConfirmView(LoginRequiredMixin, TemplateView):
     template_name = 'accounts/delete_confirm.html'
