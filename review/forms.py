@@ -1,5 +1,5 @@
 from django import forms
-from .models import Review
+from .models import Review, Contact
 
 class ReviewForm(forms.ModelForm):
     class Meta:
@@ -37,10 +37,10 @@ class ReviewForm(forms.ModelForm):
             raise forms.ValidationError('課題の評価についての言及が短すぎます')
         return evaluation
 
-class ContactForm(forms.Form):
-    name = forms.CharField(label='お名前', max_length=30)
-    email = forms.EmailField(label='メールアドレス', max_length=30)
-    message = forms.CharField(label='お問い合わせ内容', widget=forms.Textarea)
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        fields = ['name', 'email', 'message']
 
     def __init__(self, *args, **kwargs):
         for field in self.base_fields.values():

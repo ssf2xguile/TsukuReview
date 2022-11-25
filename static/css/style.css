@@ -287,8 +287,13 @@ footer {
     background-color: #fe5855;
 }
 
-.btn-agree {
-    background-color: #fe5855;
+.btn-orange {
+    background-color: #f76c28;
+    color: white;
+}
+
+.btn-orange:hover {
+    background-color: #ff8e00;
     color: white;
 }
 

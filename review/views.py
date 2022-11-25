@@ -32,13 +32,19 @@ class ContactsConfirmView(FormView):
     def form_invalid(self, form):
         return render(self.request, 'review/contacts.html', {'form': form})
 
-class ContactsCompleteView(CreateView):
+
+class ContactCreateView(CreateView):
     form_class = ContactForm
     success_url = reverse_lazy('contacts_complete')
 
     def form_invalid(self, form):
         """基本的にはここに飛んでこないはずです。UserDataConfrimでバリデーションは済んでるため"""
-        return render(self.request, 'review/contacts_complete.html', {'form': form})
+        return render(self.request, 'review/contacts.html', {'form': form})
+
+
+class ContactsCompleteView(TemplateView):
+    template_name = 'review/contacts_complete.html'
+
 
 class SearchView(ListView):
     model = Review

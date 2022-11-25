@@ -8,6 +8,7 @@ urlpatterns = [
     path('privacy/', views.PrivacyView.as_view(), name='privacy'),
     path('contacts/', views.ContactsView.as_view(), name='contacts'),
     path('contacts/confirm/', views.ContactsConfirmView.as_view(), name='contacts_confirm'),
+    path('contacts/create/', views.ContactCreateView.as_view(), name='contacts_create'),
     path('contacts/complete/', views.ContactsCompleteView.as_view(), name='contacts_complete'),
     path('lecture/<str:pk>/', views.LectureView.as_view(), name='lecture'),
     path('search/', views.SearchView.as_view(), name='search'),

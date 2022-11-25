@@ -24,7 +24,7 @@ class Subject(models.Model):
     star5 = models.IntegerField(verbose_name="星5",blank=False,default=1)
 
     def __str__(self):
-        return self.code + " " + self.name
+        return self.name
 
 class Review(models.Model):
     YEAR = (
@@ -68,3 +68,12 @@ class Review(models.Model):
 
     def __str__(self):
         return str(self.review_id)
+
+class Contact(models.Model):
+    name = models.CharField(verbose_name='名前', blank=False, max_length=40)
+    email = models.EmailField(verbose_name='メールアドレス', blank=False, max_length=40)
+    message = models.TextField(verbose_name='メッセージ', blank=False, max_length=500)
+    created_at = models.DateTimeField(verbose_name='作成日時', default=timezone.now)
+
+    def __str__(self):
+        return self.name

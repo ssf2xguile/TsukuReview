@@ -20,17 +20,19 @@
                         </div>
                     </div>
                     {% endfor %}
-                    <form action="{% url 'contacts' %}" method="POST">
-                        <div class="mx-auto d-inline-block mb-2"><button type="submit" class="btn btn-secondary">戻る</button></div>
-                        {% for field in form %}{{ field.as_hidden }}{% endfor %}
-                        {% csrf_token %}
-                    </form>
-                    
-                    <form action="{% url 'contacts_complete' %}" method="POST">
-                        <div class="mx-auto d-inline-block mb-2"><button type="submit" class="btn btn-agree">送信する</button></div>
-                        {% for field in form %}{{ field.as_hidden }}{% endfor %}
-                        {% csrf_token %}
-                    </form>
+                    <div class="text-center">
+                        <form action="{% url 'contacts' %}" method="POST" class="d-inline">
+                            <button type="submit" class="btn btn-secondary">戻る</button>
+                            {% for field in form %}{{ field.as_hidden }}{% endfor %}
+                            {% csrf_token %}
+                        </form>
+                        
+                        <form action="{% url 'contacts_create' %}" method="POST" class="d-inline">
+                            <button type="submit" class="btn btn-orange">送信する</button>
+                            {% for field in form %}{{ field.as_hidden }}{% endfor %}
+                            {% csrf_token %}
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
