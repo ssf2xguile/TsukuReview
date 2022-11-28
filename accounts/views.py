@@ -4,7 +4,7 @@ from django.views.generic import TemplateView, CreateView, View, FormView, ListV
 from django.views.generic.edit import UpdateView, DeleteView
 from django.shortcuts import render, redirect
 from django.contrib.sites.shortcuts import get_current_site
-from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
+from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import (
      get_user_model, logout as auth_logout,
@@ -14,7 +14,7 @@ from django.http import Http404, HttpResponseBadRequest
 from django.template.loader import render_to_string
 from django.core.signing import BadSignature, SignatureExpired, loads, dumps
 from accounts.models import CustomUser, Notice
-from .mixins import OnlyStaffMixin
+from .mixins import OnlyStaffMixin, OnlyYouMixin
 from .forms import UserCreateForm, ProfileUpdateForm, MyPasswordChangeForm, UserLoginForm, NoticeForm, MySetPasswordForm, MyPasswordResetForm
 
 User = get_user_model() # 自作したUserモデルを使用するための宣言
@@ -153,16 +153,16 @@ class PasswordResetCompleteView(PasswordResetCompleteView):
     template_name = 'accounts/password_reset_complete.html'
 
 
-class DeleteConfirmView(LoginRequiredMixin, TemplateView):
+class DeleteConfirmView(LoginRequiredMixin, OnlyYouMixin, DeleteView):
     template_name = 'accounts/delete_confirm.html'
+    success_url = reverse_lazy("delete_complete")
+    model = User
+    slug_field = 'pk'
+    slug_url_kwarg = 'pk'
 
-class UserDeleteView(LoginRequiredMixin, View):
+class DeleteCompleteView(TemplateView):
+    template_name = 'accounts/delete_complete.html'
 
-    # アカウントごと削除
-    def get(self, *args, **kwargs):
-        CustomUser.objects.filter(email=self.request.user.email).delete()
-        auth_logout(self.request)
-        return render(self.request,'accounts/delete_complete.html')
 
 class NoticesView(LoginRequiredMixin, OnlyStaffMixin, ListView):
     template_name = 'accounts/notices.html'

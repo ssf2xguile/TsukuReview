@@ -7,21 +7,8 @@
     <h1 class="my-3">プロフィール</h1>
     <div class="row">
         <div class="col-md-3">
-            <div class="list-group mb-4">
-                <a href="{% url 'profile' %}" class="list-group-item list-group-item-action">プロフィール情報</a>
-                <a href="{% url 'profile_edit' %}"
-                    class="list-group-item list-group-item-action">プロフィールの変更</a>
-                <a href="{% url 'password_change' %}" class="list-group-item list-group-item-action">パスワードの変更</a>
-                <a href="{% url 'delete_confirm' %}" class="list-group-item list-group-item-action">アカウントの削除</a>
-            </div>
-
-            {% if user.is_staff %}
-            <div class="list-group mb-4">
-                <a href="{% url 'staff_notices' %}" class="list-group-item list-group-item-action list-group-item-secondary active">お知らせ一覧</a>
-                <a href="{% url 'staff_notice_create' %}"
-                    class="list-group-item list-group-item-action">お知らせ作成</a>
-            </div>
-            {% endif %}
+            {% include 'navigate.html' %}
+            <input type="hidden" value="お知らせ一覧" id="page_title" />
         </div>
         <div class="col-md-9">
             <div class="card mb-3">
@@ -53,4 +40,8 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'js/navigate.js' %}"></script>
 {% endblock %}
