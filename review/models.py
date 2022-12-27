@@ -51,7 +51,7 @@ class Review(models.Model):
         (0, '非公開'),
     )
 
-    lecture  = models.ForeignKey(Subject, on_delete=models.CASCADE, default='GA13501')
+    lecture  = models.ForeignKey(Subject, on_delete=models.CASCADE, default='GA13501', related_name='related_reviews')
     review_id = models.UUIDField(verbose_name='口コミid', primary_key=True, default=uuid.uuid4, editable=False)
     sender_name = models.CharField(verbose_name='投稿者名', blank=False, max_length=40)
     sender_college = models.IntegerField(verbose_name='投稿者の所属学類', choices=CustomUser.COLLEGE,blank=False, default=1)
