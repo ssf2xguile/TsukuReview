@@ -114,24 +114,5 @@ Vue.createApp({
                 return value;
             }
         },
-        DataRatingCalculation1(star1, star2, star3, star4, star5) {
-            //星の数から評価を計算する
-            const result = (star1 * 1 + star2 * 2 + star3 * 3 + star4 * 4 + star5 * 5) / (star1 + star2 + star3 + star4 + star5);
-            const result_round1 = Math.round(result*100) / 50;
-            const result_floor = Math.floor(result_round1);
-            const result_final = (result_floor*5) /10;
-            return result_final.toPrecision(2);
-        },
-        DataRatingCalculation2(star1, star2, star3, star4, star5) {
-            //星の数から評価を計算する
-            const result = (star1 * 1 + star2 * 2 + star3 * 3 + star4 * 4 + star5 * 5) / (star1 + star2 + star3 + star4 + star5);
-            const result_round2 = Math.round(result*100) / 100;
-            const result_str =  result_round2.toPrecision(3);
-            return result_str;
-        },
-        RatingCount(star1, star2, star3, star4, star5) {
-            //票の数を合計する
-            return (star1 + star2 + star3 + star4 + star5);
-        },
     }
 }).mount('#search_app')

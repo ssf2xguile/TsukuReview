@@ -17,11 +17,6 @@ class Subject(models.Model):
     subtype =  models.TextField(verbose_name='種類', blank=True, max_length=32, default="")
     schools = models.CharField(verbose_name="学群等", blank=True,max_length=40, default="")
     colleges = models.CharField(verbose_name="学類等", blank=True, max_length=40, default="")
-    star1 = models.IntegerField(verbose_name="星1",blank=False,default=0)
-    star2 = models.IntegerField(verbose_name="星2",blank=False,default=0)
-    star3 = models.IntegerField(verbose_name="星3",blank=False,default=0)
-    star4 = models.IntegerField(verbose_name="星4",blank=False,default=0)
-    star5 = models.IntegerField(verbose_name="星5",blank=False,default=1)
 
     def __str__(self):
         return self.name

@@ -55,15 +55,13 @@
                                             class="comment-img me-2">
                                         <p class="d-inline fw-bold me-2">口コミ</p>
                                         <p class="d-inline fs-4 me-2"><span class="star5_rating" id="star5-rating"
-                                                :data-rate="[[DataRatingCalculation1(sub.star1, sub.star2, sub.star3, sub.star4, sub.star5)]]"></span>
+                                                :data-rate="[[sub.rating_datas.rating_data1]]"></span>
                                         </p>
-                                        <!-- レビューの計算を行う -->
+                                        <!-- 小数第二位まで表示.toPrecision(3) -->
                                         <p class="d-inline fs-4 fw-bold text-primary me-2"><u
-                                                id="calculate_result">[[DataRatingCalculation2(sub.star1, sub.star2,
-                                                sub.star3, sub.star4, sub.star5)]]</u>
+                                                id="calculate_result">[[sub.rating_datas.rating_data2.toPrecision(3)]]</u>
                                         </p>
-                                        <p class="d-inline">([[RatingCount(sub.star1, sub.star2, sub.star3, sub.star4,
-                                            sub.star5)]]件)</p>
+                                        <p class="d-inline">([[sub.rating_datas.rating_count]]件)</p>
                                     </div>
                                     <p class="d-inline text-secondary">[[ValidateData(sub.colleges)]]</p>
 
