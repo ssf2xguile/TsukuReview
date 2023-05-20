@@ -163,29 +163,33 @@ class LectureTest(TestCase):
         url = reverse('lecture', kwargs={'pk': self.subject.pk})
         form_data = {
             'title': 'Test Review',
-            'year': 2023,
+            'year': 2022,
             'rating': 5,
-            'grade': 'A',
+            'grade': 5,
             'overall': 'This is a test review.',
             'difficulty': 'The difficulty level was moderate.',
             'kadai': 'The assignments were challenging.',
             'evaluation': 'I highly recommend this subject.'
         }
-        self.client.login(username='testuser', password='testpassword')
-        response = self.client.post(url, data=form_data)
-        self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse('lecture', kwargs={'pk': self.subject.pk}))
+        self.client.login(email='test@example.com', password='testpassword')
+        response = self.client.post(url, form_data)
+        self.assertEqual(response.status_code, 302)  # リダイレクトのステータスコードを確認
+        self.assertRedirects(response, reverse('lecture', kwargs={'pk': self.subject.pk}), status_code=302, target_status_code=200)
+        # リダイレクト後のページを取得してステータスコード200が返ってくるかテスト
+        redirect_response = self.client.get(response.url)
+        self.assertEqual(redirect_response.status_code, 200)
+
 
         # Verify that the review is created
         review = Review.objects.all().first()
         self.assertIsNotNone(review)
-        self.assertEqual(review.year, 2023)
+        self.assertEqual(review.year, 2022)
         self.assertEqual(review.rating, 5)
-        self.assertEqual(review.grade, 'A')
+        self.assertEqual(review.grade, 5)
         self.assertEqual(review.overall, 'This is a test review.')
         self.assertEqual(review.difficulty, 'The difficulty level was moderate.')
         self.assertEqual(review.kadai, 'The assignments were challenging.')
-        self.assertEqual(review.evaluation, 'I highly recommend this subject')
+        self.assertEqual(review.evaluation, 'I highly recommend this subject.')
         self.assertEqual(review.lecture, self.subject)
         self.assertEqual(review.sender_name, 'testuser')
 
@@ -193,15 +197,15 @@ class LectureTest(TestCase):
         url = reverse('lecture', kwargs={'pk': self.subject.pk})
         form_data = {
             'title': 'T',  # Invalid title (less than 2 characters)
-            'year': 2023,
+            'year': 2022,
             'rating': 5,
-            'grade': 'A',
+            'grade': 5,
             'overall': 'This is a test review.',
             'difficulty': 'The difficulty level was moderate.',
             'kadai': 'The assignments were challenging.',
             'evaluation': 'I highly recommend this subject.'
         }
-        self.client.login(username='testuser', password='testpassword')
+        self.client.login(email='test@example.com', password='testpassword')
         response = self.client.post(url, form_data)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'review/lecture.html')
