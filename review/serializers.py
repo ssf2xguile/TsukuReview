@@ -15,9 +15,37 @@ class SearchSubjectSerializer(serializers.ModelSerializer):
         context['rating_count'] = CountCaluculation(obj)
         return context
 
-
 class GetSubjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subject
         fields = '__all__'
- 
+
+class ValidateReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review
+        fields = ('title', 'overall', 'difficulty', 'kadai', 'evaluation')
+
+    def validate_title(self, value):
+        if len(value) < 2:
+            raise serializers.ValidationError("タイトルが短すぎます")
+        return value
+    
+    def validate_overall(self, value):
+        if len(value) < 3:
+            raise serializers.ValidationError("総評が短すぎます")
+        return value
+    
+    def validate_difficulty(self, value):
+        if len(value) < 3:
+            raise serializers.ValidationError("課題の難易度についての言及が短すぎます")
+        return value
+
+    def validate_kadai(self, value):
+        if len(value) < 3:
+            raise serializers.ValidationError("課題や試験についての言及が短すぎます")
+        return value
+    
+    def validate_evaluation(self, value):
+        if len(value) < 2:
+            raise serializers.ValidationError("課題の評価についての言及が短すぎます")
+        return value

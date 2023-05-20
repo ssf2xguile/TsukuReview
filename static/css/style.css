@@ -16,16 +16,16 @@ body {
     position: relative;
 }
 
-.index-main img{
+.index-main img {
     width: 100%;
 }
 
-.index-main-content{
+.index-main-content {
     color: #fff;
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
 }
 
 
@@ -34,7 +34,7 @@ body {
     margin-bottom: 15px;
 }
 
-.container > [class^="border-bottom"]:last-child {
+.container>[class^="border-bottom"]:last-child {
     padding-bottom: 15px;
 }
 
@@ -154,39 +154,86 @@ body {
     height: 40px;
 }
 
-.star5_rating{
+.star5_rating {
     position: relative;
     z-index: 0;
     display: inline-block;
     white-space: nowrap;
-    color: #cecece; /* グレーカラー 自由に設定化 */
+    color: #cecece;
+    /* グレーカラー 自由に設定化 */
 }
 
-.star5_rating:before, .star5_rating:after{
+.star5_rating:before,
+.star5_rating:after {
     content: '★★★★★';
 }
 
-.star5_rating:after{
+.star5_rating:after {
     position: absolute;
     z-index: 1;
     top: 0;
     left: 0;
     overflow: hidden;
     white-space: nowrap;
-    color: #fbc634; /* イエローカラー 自由に設定化 */
+    color: #fbc634;
+    /* イエローカラー 自由に設定化 */
 }
 
-.star5_rating[data-rate="5.0"]:after{ width: 100%; } /* 星5 */
-.star5_rating[data-rate="4.5"]:after{ width: 90%; } /* 星4.5 */
-.star5_rating[data-rate="4.0"]:after{ width: 80%; } /* 星4 */
-.star5_rating[data-rate="3.5"]:after{ width: 70%; } /* 星3.5 */
-.star5_rating[data-rate="3.0"]:after{ width: 60%; } /* 星3 */
-.star5_rating[data-rate="2.5"]:after{ width: 50%; } /* 星2.5 */
-.star5_rating[data-rate="2.0"]:after{ width: 40%; } /* 星2 */
-.star5_rating[data-rate="1.5"]:after{ width: 30%; } /* 星1.5 */
-.star5_rating[data-rate="1.0"]:after{ width: 20%; } /* 星1 */
-.star5_rating[data-rate="0.5"]:after{ width: 10%; } /* 星0.5 */
-.star5_rating[data-rate="0.0"]:after{ width: 0%; } /* 星0 */
+.star5_rating[data-rate="5.0"]:after {
+    width: 100%;
+}
+
+/* 星5 */
+.star5_rating[data-rate="4.5"]:after {
+    width: 90%;
+}
+
+/* 星4.5 */
+.star5_rating[data-rate="4.0"]:after {
+    width: 80%;
+}
+
+/* 星4 */
+.star5_rating[data-rate="3.5"]:after {
+    width: 70%;
+}
+
+/* 星3.5 */
+.star5_rating[data-rate="3.0"]:after {
+    width: 60%;
+}
+
+/* 星3 */
+.star5_rating[data-rate="2.5"]:after {
+    width: 50%;
+}
+
+/* 星2.5 */
+.star5_rating[data-rate="2.0"]:after {
+    width: 40%;
+}
+
+/* 星2 */
+.star5_rating[data-rate="1.5"]:after {
+    width: 30%;
+}
+
+/* 星1.5 */
+.star5_rating[data-rate="1.0"]:after {
+    width: 20%;
+}
+
+/* 星1 */
+.star5_rating[data-rate="0.5"]:after {
+    width: 10%;
+}
+
+/* 星0.5 */
+.star5_rating[data-rate="0.0"]:after {
+    width: 0%;
+}
+
+/* 星0 */
 
 .kugiri-box {
     background-color: #F3F3F3;
@@ -245,20 +292,20 @@ footer {
 }
 
 /* テーブルの設定(コピペ) */
-.table-original{
+.table-original {
     width: 100%;
     border-collapse: collapse;
 }
-  
-.table-original tr{
+
+.table-original tr {
     border-bottom: solid 2px white;
 }
-  
-.table-original tr:last-child{
+
+.table-original tr:last-child {
     border-bottom: none;
 }
-  
-.table-original th{
+
+.table-original th {
     text-align: left;
     width: 30%;
     background-color: #52c2d0;
@@ -267,8 +314,8 @@ footer {
     padding: 10px 0;
 }
 
-  
-.table-original td{
+
+.table-original td {
     text-align: left;
     width: 70%;
     text-align: center;
@@ -276,13 +323,13 @@ footer {
     padding: 10px 0;
 }
 
-.error-message{
+.error-message {
     color: red;
     font-size: 0.8rem;
 }
 
-.req{
-    font-size:11px;
+.req {
+    font-size: 11px;
     font-weight: normal;
     background-color: #fe5855;
 }
@@ -298,19 +345,24 @@ footer {
 }
 
 @media (max-width:768px) {
+    body {
+        font-size: 0.85rem;
+    }
+
     /* indexページの主要画像, 画像の中央に文字を重ねる */
-    .index-main img{
+    .index-main img {
         width: 100%;
         top: 200px;
         height: 220px;
-        object-fit: cover;  
+        object-fit: cover;
         object-position: 30% 40%;
     }
-    .index-main-content{
+
+    .index-main-content {
         width: 75%;
     }
 
-    .index-feature img{
+    .index-feature img {
         padding-bottom: 15px;
     }
 

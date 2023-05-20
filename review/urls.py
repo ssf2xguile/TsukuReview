@@ -15,4 +15,5 @@ urlpatterns = [
     path('new_reviews/', views.NewReviewsView.as_view(), name='new_reviews'),
     path('api/search_subjects', apis.SearchSubjectAPI.as_view(), name = "api_search_subjects"),
     path('api/get_subject', apis.GetSubjectAPI.as_view(), name = "api_get_subject"),
+    path('api/create_review', apis.CreateReviewAPI.as_view(), name = "api_create_review"),
 ]
