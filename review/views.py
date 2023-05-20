@@ -25,7 +25,9 @@ class ContactsView(FormView):
         return render(self.request, 'review/contacts.html', {'form': form})
 
 class ContactsConfirmView(FormView):
+    template_name = 'review/contacts_confirm.html'
     form_class = ContactForm
+    http_method_names = ['post']  # Allow only POST requests
 
     def form_valid(self, form):
         return render(self.request, 'review/contacts_confirm.html', {'form': form})
@@ -120,11 +122,16 @@ def DataRatingCalculation1(obj):
     objs = obj.related_reviews.all()
     for obj in objs:
         rate_dict[obj.rating] += 1
-    result = (rate_dict[1] + rate_dict[2] * 2 + rate_dict[3] * 3 + rate_dict[4] * 4 + rate_dict[5] * 5) / (rate_dict[1] + rate_dict[2] + rate_dict[3] + rate_dict[4] + rate_dict[5])
-    result_round1 = round(result*100)/50
-    result_floor = math.floor(result_round1)
-    result_final = (result_floor*5)/10
-    return result_final
+    
+    total_ratings = sum(rate_dict.values())
+    if total_ratings > 0:
+        result = (rate_dict[1] + rate_dict[2] * 2 + rate_dict[3] * 3 + rate_dict[4] * 4 + rate_dict[5] * 5) / (rate_dict[1] + rate_dict[2] + rate_dict[3] + rate_dict[4] + rate_dict[5])
+        result_round1 = round(result*100)/50
+        result_floor = math.floor(result_round1)
+        result_final = (result_floor*5)/10
+        return result_final
+    else:
+        return 0.0
 
 def DataRatingCalculation2(obj):
     """
@@ -134,9 +141,13 @@ def DataRatingCalculation2(obj):
     objs = obj.related_reviews.all()
     for obj in objs:
         rate_dict[obj.rating] += 1
-    result = (rate_dict[1] + rate_dict[2] * 2 + rate_dict[3] * 3 + rate_dict[4] * 4 + rate_dict[5] * 5) / (rate_dict[1] + rate_dict[2] + rate_dict[3] + rate_dict[4] + rate_dict[5])
-    result_round2 = round(result*100)/100
-    return result_round2
+    total_ratings = sum(rate_dict.values())
+    if total_ratings > 0:
+        result = (rate_dict[1] + rate_dict[2] * 2 + rate_dict[3] * 3 + rate_dict[4] * 4 + rate_dict[5] * 5) / (rate_dict[1] + rate_dict[2] + rate_dict[3] + rate_dict[4] + rate_dict[5])
+        result_round2 = round(result*100)/100
+        return result_round2
+    else:
+        return 0.0
 
 def CountCaluculation(obj):
     """
